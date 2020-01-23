@@ -47,3 +47,7 @@ Used to parse csv to json: https://d3-wiki.readthedocs.io/zh_CN/master/CSV/
 
 For styling the app: https://react-bootstrap.github.io/
 
+### Font-Awesome
+
+For icons: https://fontawesome.com
+

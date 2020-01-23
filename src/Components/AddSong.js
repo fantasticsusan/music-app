@@ -1,14 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import * as d3 from "d3";
-import sound_recording from '../files/sound_recordings.csv';
-import sound_recording_input_report from '../files/sound_recordings_input_report.csv';
+import React, { useState } from 'react';
 import {
-    Spinner,
     Form,
-    Table,
     Col,
-    Row,
-    Alert,
     Collapse
 } from 'react-bootstrap';
 
@@ -20,8 +13,8 @@ function AddSong(params) {
 
     const submitSong = (e) => {
         e.preventDefault();
-        console.log("Received song ", song);
         submitSongDB(song);
+        setSong({'title': '', 'artist':'', 'isrc': '', 'duration':''});
     }
 
     const handleChange = (e) => {
