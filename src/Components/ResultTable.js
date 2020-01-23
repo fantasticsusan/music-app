@@ -25,12 +25,12 @@ function ResultTable(param) {
                 <tbody>
                     {filteredResults.map((song, index) => {
                         return (
-                            <tr>
+                            <tr key={index}>
                                 <td>{song.title}</td>
                                 <td>{song.artist}</td>
                                 <td>{song.isrc}</td>
                                 <td>{song.duration}</td>
-                                <td><Button variant="success" onClick={() => match(song, index)}><i className="fas fa-check-circle"></i></Button></td>
+                                <td><Button variant="success" onClick={() => match(song)}><i className="fas fa-check-circle"></i></Button></td>
                             </tr>)
                     })}
                 </tbody>

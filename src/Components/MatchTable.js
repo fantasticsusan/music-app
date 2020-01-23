@@ -10,8 +10,6 @@ function MatchTable(param) {
     const soundRecordingMatched = param.soundRecordingMatched;
     const deleteMatch = param.deleteMatch;
 
-    console.log("Match table receives ", param.soundRecordingMatched);
-
     return (
         <div>
             <div className="center">
@@ -30,7 +28,7 @@ function MatchTable(param) {
                 <tbody>
                     {soundRecordingMatched.map((song, index) => {
                         return (
-                            <tr>
+                            <tr key={index}>
                                 <td>{song.title}</td>
                                 <td>{song.artist}</td>
                                 <td>{song.isrc}</td>

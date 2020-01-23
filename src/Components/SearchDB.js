@@ -4,7 +4,6 @@ import sound_recording from '../files/sound_recordings.csv';
 import sound_recording_input_report from '../files/sound_recordings_input_report.csv';
 import {
     Spinner,
-    Form,
     Col,
     Row,
     Alert,
@@ -13,11 +12,11 @@ import {
 import AddSong from './AddSong';
 import MatchTable from './MatchTable';
 import ResultTable from './ResultTable';
-
+import NavigationBar from './Navbar';
 function SearchDB() {
 
-    const [soundRecording, setSoundRecording] = useState([]);
-    const [soundRecordingInputReport, setSoundRecordingInputRecord] = useState([]);
+    const [soundDatabase, setSoundDatabase] = useState([]);
+    const [soundRecordingInput, setSoundRecordingInput] = useState([]);
     const [soundRecordingMatched, setSoundRecordingMatched] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
     const [filterSong, setFilterSong] = useState({ 'title': '', 'artist': '' });
@@ -35,49 +34,39 @@ function SearchDB() {
 
     useEffect(() => {
         d3.csv(sound_recording, function (res) {
-            setSoundRecording(res);
+            setSoundDatabase(res);
             setFilteredResults(res);
         });
 
         d3.csv(sound_recording_input_report, function (res) {
-            setSoundRecordingInputRecord(res);
+            setSoundRecordingInput(res);
         });
 
     }, []);
 
     useEffect(() => {
-        console.log("Calling use effect");
-        var result = soundRecording;
-        result = soundRecording.filter(function (song) {
+        var results = soundDatabase;
+        results = soundDatabase.filter(function (song) {
             return song.title.toUpperCase().includes(filterSong.title.toUpperCase()) || song.artist.toUpperCase().includes(filterSong.artist.toUpperCase());
         });
-        if (result.length === 0) {
+
+        if (results.length === 0) {
             setEmptyError(true);
         } else {
             setEmptyError(false);
         }
 
-        setFilteredResults(result);
+        setFilteredResults(results);
 
-    }, [filterSong, soundRecording]);
-
-    const renderOptions = () => {
-        var result = [];
-        for (var i = 0; i < soundRecordingInputReport.length; i++) {
-            const song = soundRecordingInputReport[i];
-            result.push(<option value={i}>{song.title} - {song.artist}</option>);
-        }
-        return result;
-    }
+    }, [filterSong, soundDatabase]);
 
     const handleChange = (e) => {
         clearManualInput();
         const value = e.target.value;
-
         setSelectInput(value);
 
         if (value !== "-1") {
-            setFilterSong(soundRecordingInputReport[value]);
+            setFilterSong(soundRecordingInput[value]);
         } else {
             setFilterSong({ 'title': '', 'artist': '' });
         }
@@ -93,19 +82,19 @@ function SearchDB() {
     }
 
     const submitSong = (song) => {
-        setSoundRecordingInputRecord([...soundRecording, song]);
+        setSoundDatabase([...soundDatabase, song]);
         setOpen(false);
         clearFilters();
         setSuccessfulMsg(true);
     }
 
     const clearSelectInput = () => {
-        setFilteredResults(soundRecording);
+        setFilteredResults(soundDatabase);
         setSelectInput('');
     }
 
     const clearManualInput = () => {
-        setFilteredResults(soundRecording);
+        setFilteredResults(soundDatabase);
         setManualInput('');
     }
 
@@ -116,79 +105,68 @@ function SearchDB() {
 
     }
 
-    const match = (song, index) => {
+    const match = (song) => {
+        const index = soundDatabase.indexOf(song);
         setSoundRecordingMatched([...soundRecordingMatched, song]);
 
-        soundRecording.splice(index, 1);
-        setSoundRecording([...soundRecording]);
+        soundDatabase.splice(index, 1);
+        setSoundDatabase([...soundDatabase]);
     }
-    const deleteMatch = (song, index) => {
+    const deleteMatch = (song) => {
+
+        const index = soundRecordingMatched.indexOf(song);
+
         soundRecordingMatched.splice(index, 1);
         setSoundRecordingMatched([...soundRecordingMatched]);
 
-        setSoundRecording([...soundRecording, song]);
+        setSoundDatabase([...soundDatabase, song]);
     }
 
     return (
-        <div className="container_div">
-            {soundRecording === undefined || soundRecording.length === 0 ?
-                <Spinner animation="border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </Spinner>
-                :
-                <>
-                    <Row>
-                        <Col>
-                            <div className="center">
-                                <h2 className="subtitle"><i className="fas fa-search"></i> SEARCH</h2>
-                            </div>
-                            <Form>
-                                <Form.Group controlId="soundRecordingSelect">
-                                    <Form.Label>Please select one song</Form.Label>
-                                    <Form.Control value={selectInput} as="select" onChange={handleChange}>
-                                        <option value="-1">Choose one...</option>
-                                        {renderOptions()}
-                                    </Form.Control>
-                                </Form.Group>
-                                <Form.Group controlId="soundRecordingSelect">
-                                    <Form.Label>Or manually type a song</Form.Label>
-                                    <Form.Control value={manualInput} placeholder="Type title or artist song ..." onChange={onTyping} />
-                                </Form.Group>
-                                <Button variant="secondary" onClick={() => clearFilters()}><i className="fas fa-times-circle"></i> Clear filters</Button>
+        <>
+            <NavigationBar clearFilters={clearFilters} soundRecordingInputReport={soundRecordingInput} selectInput={selectInput} handleChange={handleChange} onTyping={onTyping} manualInput={manualInput} />
+            <div className="container_div">
+                {soundDatabase === undefined || soundDatabase.length === 0 ?
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
+                    :
+                    <>
 
-                            </Form>
-                            <hr />
-                            <Button variant="primary" onClick={() => setOpen(!open)}><i className="fas fa-plus-circle"></i> Add a song manually</Button>
-                            <AddSong open={open} submitSong={submitSong} />
-                            {successfulMsg === true ?
-                                <div class="alertSucess">
-                                    <Alert variant="success" onClose={() => setSuccessfulMsg(false)} dismissible>
-                                        <Alert.Heading>BOOM SHAKALAKA!</Alert.Heading>
-                                        <p>Your song was successfully added!</p>
-                                    </Alert>
+                        <Button variant="primary" onClick={() => setOpen(!open)}><i className="fas fa-plus-circle"></i> Add a song manually</Button>
+                        <AddSong open={open} submitSong={submitSong} />
+                        {successfulMsg === true ?
+                            <div class="alertSucess">
+                                <Alert variant="success" onClose={() => setSuccessfulMsg(false)} dismissible>
+                                    <Alert.Heading>BOOM SHAKALAKA!</Alert.Heading>
+                                    <p>Your song was successfully added!</p>
+                                </Alert>
+                            </div>
+                            :
+                            ''
+                        }
+                        <Row>
+                            <Col>
+
+                                <div className="center">
+                                    <h2 className="subtitle">Results</h2>
                                 </div>
-                                :
-                                ''
-                            }
-                        </Col>
-                        <Col>
-                            <div className="center">
-                                <h2 className="subtitle">Results</h2>
-                            </div>
-                            {emptyError === true ?
-                                <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
-                                :
-                                <ResultTable filteredResults={filteredResults} match={match} />
-                            }
 
-                        </Col>
-                        <Col>
-                            <MatchTable soundRecordingMatched={soundRecordingMatched} deleteMatch={deleteMatch} />
-                        </Col>
-                    </Row>
-                </>
-            }
-        </div>
+                                {emptyError === true ?
+                                    <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
+                                    :
+                                    <ResultTable filteredResults={filteredResults} match={match} />
+                                }
+
+                            </Col>
+                            <Col>
+                                <MatchTable soundRecordingMatched={soundRecordingMatched} deleteMatch={deleteMatch} />
+                            </Col>
+                        </Row>
+                    </>
+                }
+            </div>
+        </>
     );
 }
 export default SearchDB;
