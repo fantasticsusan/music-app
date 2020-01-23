@@ -11,8 +11,8 @@ import {
 } from 'react-bootstrap';
 import AddSong from './AddSong';
 import MatchTable from './MatchTable';
+import InputTable from './InputTable';
 import ResultTable from './ResultTable';
-import NavigationBar from './Navbar';
 function SearchDB() {
 
     const [soundDatabase, setSoundDatabase] = useState([]);
@@ -123,7 +123,6 @@ function SearchDB() {
 
     return (
         <>
-            <NavigationBar clearFilters={clearFilters} soundRecordingInputReport={soundRecordingInput} selectInput={selectInput} handleChange={handleChange} onTyping={onTyping} manualInput={manualInput} />
             <div className="container_div">
                 {soundDatabase === undefined || soundDatabase.length === 0 ?
                     <Spinner animation="border" role="status">
@@ -146,7 +145,10 @@ function SearchDB() {
                         }
                         <Row>
                             <Col>
-                                <ResultTable filteredResults={filteredResults} match={match} emptyError={emptyError} />
+                                <InputTable clearFilters={clearFilters} soundRecordingInputReport={soundRecordingInput} selectInput={selectInput} handleChange={handleChange} onTyping={onTyping} manualInput={manualInput} />
+                            </Col>
+                            <Col>
+                                <ResultTable filteredResults={filteredResults} match={match} emptyError={emptyError} onTyping={onTyping} manualInput={manualInput} />
                             </Col>
 
                         </Row>
