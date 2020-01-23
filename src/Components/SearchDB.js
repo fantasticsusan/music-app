@@ -102,7 +102,6 @@ function SearchDB() {
         clearSelectInput();
         clearManualInput();
         setFilterSong({ 'title': '', 'artist': '' });
-
     }
 
     const match = (song) => {
@@ -112,8 +111,8 @@ function SearchDB() {
         soundDatabase.splice(index, 1);
         setSoundDatabase([...soundDatabase]);
     }
-    const deleteMatch = (song) => {
 
+    const deleteMatch = (song) => {
         const index = soundRecordingMatched.indexOf(song);
 
         soundRecordingMatched.splice(index, 1);
@@ -147,21 +146,12 @@ function SearchDB() {
                         }
                         <Row>
                             <Col>
-
-                                <div className="center">
-                                    <h2 className="subtitle">Results</h2>
-                                </div>
-
-                                {emptyError === true ?
-                                    <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
-                                    :
-                                    <ResultTable filteredResults={filteredResults} match={match} />
-                                }
-
+                                <ResultTable filteredResults={filteredResults} match={match} emptyError={emptyError} />
                             </Col>
-                            <Col>
-                                <MatchTable soundRecordingMatched={soundRecordingMatched} deleteMatch={deleteMatch} />
-                            </Col>
+
+                        </Row>
+                        <Row>
+                            <MatchTable soundRecordingMatched={soundRecordingMatched} deleteMatch={deleteMatch} />
                         </Row>
                     </>
                 }

@@ -13,7 +13,7 @@ function MatchTable(param) {
     return (
         <div>
             <div className="center">
-                <h2 className="subtitle">Matches</h2>
+                <h2 className="subtitle">Results</h2>
             </div>
             <Table striped bordered hover>
                 <thead>
