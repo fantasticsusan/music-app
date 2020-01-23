@@ -5,7 +5,10 @@ import sound_recording_input_report from '../files/sound_recordings_input_report
 import {
     Spinner,
     Form,
-    Table
+    Table,
+    Col,
+    Row,
+    Alert
 } from 'react-bootstrap';
 
 function SearchDB() {
@@ -13,6 +16,7 @@ function SearchDB() {
     const [soundRecording, setSoundRecording] = useState([]);
     const [soundRecordingInputReport, setSoundRecordingInputRecord] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
+    const [emptyError, setEmptyError] = useState(false);
 
     useEffect(() => {
         d3.csv(sound_recording, function (res) {
@@ -36,6 +40,12 @@ function SearchDB() {
             result = soundRecordingInputReport.filter(function (song) {
                 return song.title.includes(objectToFilter.title);
             });
+            if (result.length === 0) {
+                setEmptyError(true);
+            } else {
+                setEmptyError(false);
+            }
+
         }
         setFilteredResults(result);
     }
@@ -49,6 +59,22 @@ function SearchDB() {
         return result;
     }
 
+    const onType = (e) => {
+        const value = e.target.value;
+        var result = soundRecordingInputReport;
+
+        result = soundRecordingInputReport.filter(function (song) {
+            return song.title.includes(value) || song.artist.includes(value);
+        });
+
+        if (result.length === 0) {
+            setEmptyError(true);
+        } else {
+            setEmptyError(false);
+        }
+        setFilteredResults(result);
+    }
+
 
 
     return (
@@ -58,38 +84,51 @@ function SearchDB() {
                     <span className="sr-only">Loading...</span>
                 </Spinner>
                 :
-                <>
+                <Row>
+                    <Col>
+                        <Form.Group controlId="soundRecordingSelect">
+                            <Form.Label>Please select one song</Form.Label>
+                            <Form.Control as="select" onChange={handleChange}>
+                                <option value="-1">Choose one...</option>
+                                {renderOptions()}
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId="soundRecordingSelect">
+                            <Form.Label>Or manually type a song</Form.Label>
+                            <Form.Control placeholder="Type title or artist song ..." onChange={onType} />
 
-                    <Form.Group controlId="soundRecordingSelect">
-                        <Form.Label>Please select one song</Form.Label>
-                        <Form.Control as="select" onChange={handleChange}>
-                            <option value="-1">Choose one...</option>
-                            {renderOptions()}
-                        </Form.Control>
-                    </Form.Group>
-
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Artist</th>
-                                <th>ISRC</th>
-                                <th>Duration</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredResults.map(song => {
-                                return (
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <h2>Results</h2>
+                        {emptyError === true ?
+                            <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
+                            :
+                            <Table striped bordered hover>
+                                <thead>
                                     <tr>
-                                        <td>{song.title}</td>
-                                        <td>{song.artist}</td>
-                                        <td>{song.isrc}</td>
-                                        <td>{song.duration}</td>
-                                    </tr>)
-                            })}
-                        </tbody>
-                    </Table>
-                </>
+                                        <th>Title</th>
+                                        <th>Artist</th>
+                                        <th>ISRC</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {filteredResults.map(song => {
+                                        return (
+                                            <tr>
+                                                <td>{song.title}</td>
+                                                <td>{song.artist}</td>
+                                                <td>{song.isrc}</td>
+                                                <td>{song.duration}</td>
+                                            </tr>)
+                                    })}
+                                </tbody>
+                            </Table>
+                        }
+
+                    </Col>
+                </Row>
             }
 
         </div>
