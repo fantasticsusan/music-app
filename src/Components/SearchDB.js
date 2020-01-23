@@ -20,10 +20,11 @@ function SearchDB() {
     const [filteredResults, setFilteredResults] = useState([]);
 
     const [emptyError, setEmptyError] = useState(false);
+    const [successfulMsg, setSuccessfulMsg] = useState(false);
 
     const [open, setOpen] = useState(false);
     const [filterSong, setFilterSong] = useState({ 'title': '', 'artist': '' });
-    
+
     const [manualInput, setManualInput] = useState('');
     const [selectInput, setSelectInput] = useState('-1');
 
@@ -42,7 +43,7 @@ function SearchDB() {
 
         var result = soundRecordingInputReport;
         result = soundRecordingInputReport.filter(function (song) {
-            return song.title.includes(filterSong.title) || song.artist.includes(filterSong.artist);
+            return song.title.toUpperCase().includes(filterSong.title.toUpperCase()) || song.artist.toUpperCase().includes(filterSong.artist.toUpperCase());
         });
         if (result.length === 0) {
             setEmptyError(true);
@@ -89,6 +90,9 @@ function SearchDB() {
         setSoundRecordingInputRecord(array);
         setFilteredResults(array);
         setOpen(false);
+        clearManualInput();
+        clearSelectInput();
+        setSuccessfulMsg(true);
     }
 
     const clearSelectInput = () => {
@@ -131,6 +135,15 @@ function SearchDB() {
                         <hr />
                         <button onClick={() => setOpen(!open)} className="button"><i className="fas fa-plus-circle"></i> Add a song manually</button>
                         <AddSong open={open} submitSong={submitSong} />
+                        {successfulMsg === true ?
+
+                            <Alert variant="success" onClose={() => setSuccessfulMsg(false)} dismissible>
+                                <Alert.Heading>Boom shakalaka!</Alert.Heading>
+                                <p>Your song was successfully added!</p>
+                            </Alert>
+                            :
+                            ''
+                        }
                     </Col>
                     <Col>
                         <div className="center">
