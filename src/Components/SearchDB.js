@@ -133,14 +133,15 @@ function SearchDB() {
 
                         </Form>
                         <hr />
-                        <button onClick={() => setOpen(!open)} className="button"><i className="fas fa-plus-circle"></i> Add a song manually</button>
+                        <Button variant="primary" onClick={() => setOpen(!open)}><i className="fas fa-plus-circle"></i> Add a song manually</Button>
                         <AddSong open={open} submitSong={submitSong} />
                         {successfulMsg === true ?
-
-                            <Alert variant="success" onClose={() => setSuccessfulMsg(false)} dismissible>
-                                <Alert.Heading>Boom shakalaka!</Alert.Heading>
-                                <p>Your song was successfully added!</p>
-                            </Alert>
+                            <div class="alertSucess">
+                                <Alert variant="success" onClose={() => setSuccessfulMsg(false)} dismissible>
+                                    <Alert.Heading>Boom shakalaka!</Alert.Heading>
+                                    <p>Your song was successfully added!</p>
+                                </Alert>
+                            </div>
                             :
                             ''
                         }

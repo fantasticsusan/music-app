@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import {
     Form,
     Col,
-    Collapse
+    Collapse,
+    Button
 } from 'react-bootstrap';
 
 function AddSong(params) {
@@ -51,7 +52,7 @@ function AddSong(params) {
                     </Form.Group>
                 </Form.Row>
                 <div className="center">
-                    <button className="button" variant="primary" type="submit">Finish</button>
+                    <Button variant="primary" type="submit">Finish</Button>
                 </div>
             </Form>
         </Collapse>
