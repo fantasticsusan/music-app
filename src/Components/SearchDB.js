@@ -8,8 +8,10 @@ import {
     Table,
     Col,
     Row,
-    Alert
+    Alert,
+    Collapse
 } from 'react-bootstrap';
+import AddSong from './AddSong';
 
 function SearchDB() {
 
@@ -17,6 +19,7 @@ function SearchDB() {
     const [soundRecordingInputReport, setSoundRecordingInputRecord] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
     const [emptyError, setEmptyError] = useState(false);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         d3.csv(sound_recording, function (res) {
@@ -30,6 +33,7 @@ function SearchDB() {
             setFilteredResults(res);
         });
     }, []);
+    
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -59,7 +63,8 @@ function SearchDB() {
         return result;
     }
 
-    const onType = (e) => {
+
+    const onTyping = (e) => {
         const value = e.target.value;
         var result = soundRecordingInputReport;
 
@@ -75,6 +80,19 @@ function SearchDB() {
         setFilteredResults(result);
     }
 
+    const submitSong = (song) => {
+        var array = soundRecordingInputReport;
+        array.push(song);
+        setSoundRecordingInputRecord(array);
+
+        setOpen(false);
+    }
+
+    const clearFilter = () => {
+        setFilteredResults(soundRecordingInputReport);
+
+    }
+
 
 
     return (
@@ -86,6 +104,9 @@ function SearchDB() {
                 :
                 <Row>
                     <Col>
+                    <div className="center">
+                            <h2 className="subtitle"><i className="fas fa-search"></i> SEARCH</h2>
+                        </div>
                         <Form.Group controlId="soundRecordingSelect">
                             <Form.Label>Please select one song</Form.Label>
                             <Form.Control as="select" onChange={handleChange}>
@@ -95,13 +116,16 @@ function SearchDB() {
                         </Form.Group>
                         <Form.Group controlId="soundRecordingSelect">
                             <Form.Label>Or manually type a song</Form.Label>
-                            <Form.Control placeholder="Type title or artist song ..." onChange={onType} />
+                            <Form.Control placeholder="Type title or artist song ..." onChange={onTyping} />
                         </Form.Group>
-                        <hr/>
-                        <p className="notALink"><i className="fas fa-plus-circle"></i> Add a song manually</p>
+                        <hr />
+                        <button onClick={() => setOpen(!open)} className="button"><i className="fas fa-plus-circle"></i> Add a song manually</button>
+                        <AddSong open={open} submitSong={submitSong} />
                     </Col>
                     <Col>
-                        <h2>Results</h2>
+                        <div className="center">
+                            <h2 className="subtitle">Results</h2>
+                        </div>
                         {emptyError === true ?
                             <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
                             :

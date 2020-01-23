@@ -6,6 +6,14 @@
   padding: 20px;
 }
 
+.subtitle {
+  text-transform: uppercase;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size:30px;
+  margin:10px;
+  padding: 10px;
+}
+
 .header{
   text-align: center;
   background-color: #37474f;
@@ -20,5 +28,40 @@
   padding: 30px;
   background: white;
   height: 100%;
+}
 
+.notALink{
+  cursor: pointer;
+}
+
+.notALink:hover{
+  font-weight: bold;
+}
+
+.button {
+  background-color: #370091;
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: white;
+  display: inline-block;
+  font-weight: bold; 
+  box-shadow: none;
+  border: none; 
+  margin:10px;
+}
+
+.button:hover {
+  background-color: #701ef3;; 
+}
+
+.formContainer{
+  border-radius: 17px;
+  margin: 20px;
+  border: 1px solid lightgrey;
+  padding:20px;
+  border-radius: 10px;
+}
+
+.center{
+  text-align: center;
 }
