@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Table
 } from 'react-bootstrap';
@@ -43,10 +43,6 @@ function InputTable(params) {
                 </tbody>
             </Table>
         </div>
-        // <Form.Control  className="mr-sm-2" value={selectInput} as="select" onChange={handleChange}>
-        //     <option value="-1">Choose one...</option>
-        //     {renderOptions()}
-        // </Form.Control>
     );
 }
 export default InputTable;

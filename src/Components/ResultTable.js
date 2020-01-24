@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Table,
     Form,
     Alert,
     Row,
     Col,
-    Button
+    Button,
+    InputGroup
 } from 'react-bootstrap';
 import AddSong from './AddSong';
 
@@ -33,8 +34,12 @@ function ResultTable(params) {
                     </div>
                 </Row>
                 <Row>
-                    <span><i className="fas fa-search"></i></span>
-                    <Form.Control value={manualInput} placeholder="Search database..." onChange={onTyping} />
+                    <InputGroup className="mb-3">
+                        <InputGroup.Prepend>
+                            <InputGroup.Text id="basic-addon1"><i className="fas fa-search"></i></InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Form.Control value={manualInput} placeholder="Search database..." onChange={onTyping} />
+                    </InputGroup>
                 </Row>
                 <Row>
 
