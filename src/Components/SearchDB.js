@@ -19,18 +19,30 @@ function SearchDB() {
     soundDatabase.sort(function (a, b) {
         if (a.artist < b.artist) { return -1; }
         if (a.artist > b.artist) { return 1; }
+        if  (a.artist === b.artist){
+            if (a.title < b.title) { return -1; }
+            if (a.title > b.title) { return 1; }
+        }
         return 0;
     })
     const [soundRecordingInput, setSoundRecordingInput] = useState([]);
     soundRecordingInput.sort(function (a, b) {
         if (a.artist < b.artist) { return -1; }
         if (a.artist > b.artist) { return 1; }
+        if  (a.artist === b.artist){
+            if (a.title < b.title) { return -1; }
+            if (a.title > b.title) { return 1; }
+        }
         return 0;
     })
     const [soundRecordingMatched, setSoundRecordingMatched] = useState([]);
     soundRecordingMatched.sort(function (a, b) {
         if (a.artist < b.artist) { return -1; }
         if (a.artist > b.artist) { return 1; }
+        if  (a.artist === b.artist){
+            if (a.title < b.title) { return -1; }
+            if (a.title > b.title) { return 1; }
+        }
         return 0;
     })
     const [filteredResults, setFilteredResults] = useState([]);
