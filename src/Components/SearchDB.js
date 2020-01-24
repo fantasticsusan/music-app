@@ -121,6 +121,10 @@ function SearchDB() {
         setSoundDatabase([...soundDatabase, song]);
     }
 
+    const onSelectedRow = (song) => {
+        console.log("You have selected ", song)
+    }
+
     return (
         <>
             <div className="container_div">
@@ -145,7 +149,7 @@ function SearchDB() {
                         }
                         <Row>
                             <Col>
-                                <InputTable clearFilters={clearFilters} soundRecordingInputReport={soundRecordingInput} selectInput={selectInput} handleChange={handleChange} onTyping={onTyping} manualInput={manualInput} />
+                                <InputTable onSelectedRow={onSelectedRow} clearFilters={clearFilters} soundRecordingInputReport={soundRecordingInput} selectInput={selectInput} handleChange={handleChange} onTyping={onTyping} manualInput={manualInput} />
                             </Col>
                             <Col>
                                 <ResultTable filteredResults={filteredResults} match={match} emptyError={emptyError} onTyping={onTyping} manualInput={manualInput} />

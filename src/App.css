@@ -83,3 +83,6 @@
   padding:30px !important;
 }
 
+.custom_row:hover{
+  font-weight: bold;
+}

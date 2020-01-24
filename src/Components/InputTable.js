@@ -11,11 +11,13 @@ function InputTable(params) {
     const onTyping = params.onTyping;
     const manualInput = params.manualInput;
     const soundRecordingInputReport = params.soundRecordingInputReport;
+    const onSelectedRow = params.onSelectedRow;
 
     return (
         <div>
             <div className="center">
                 <h2 className="subtitle">INPUT</h2>
+                <p>Total input: {soundRecordingInputReport.length}</p>
             </div>
             <Table striped bordered hover>
                 <thead>
@@ -30,7 +32,7 @@ function InputTable(params) {
                 <tbody>
                     {soundRecordingInputReport.map((song, index) => {
                         return (
-                            <tr key={index}>
+                            <tr className="custom_row" key={index} onClick={() => onSelectedRow(song)}>
                                 <td>{song.title}</td>
                                 <td>{song.artist}</td>
                                 <td>{song.isrc}</td>

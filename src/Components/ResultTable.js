@@ -21,7 +21,9 @@ function ResultTable(params) {
             <Col>
                 <Row>
                     <div className="center">
-                        <h2 className="subtitle">Possible matches</h2>
+                        <h2 className="subtitle">Database</h2>
+                        <p>Total results: {filteredResults.length}</p>
+
                     </div>
                 </Row>
                 <Row>
