@@ -124,6 +124,8 @@ function SearchDB() {
     }
 
     const onSelectedRow = (song) => {
+        setManualInput('');
+        setFilterSong(emptySong)
         setSelectedSong(song);
     }
 

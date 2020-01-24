@@ -33,6 +33,7 @@ function ResultTable(params) {
                     </div>
                 </Row>
                 <Row>
+                    <span><i className="fas fa-search"></i></span>
                     <Form.Control value={manualInput} placeholder="Search database..." onChange={onTyping} />
                 </Row>
                 <Row>
@@ -43,7 +44,10 @@ function ResultTable(params) {
                                 <div class="alert_custom">
                                     <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
                                 </div>
-                                <AddSong msg="Add selected song to database" submitSong={submitSong} paramSong={selectedSong} />
+                                {selectedSong.title !== "" ?
+                                    <AddSong msg="Add selected song to database" submitSong={submitSong} paramSong={selectedSong} />
+                                    : ''
+                                }
                             </Col>
                             :
                             <Table striped bordered hover>
