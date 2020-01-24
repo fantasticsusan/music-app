@@ -16,8 +16,23 @@ function SearchDB() {
     const emptySong = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
 
     const [soundDatabase, setSoundDatabase] = useState([]);
+    soundDatabase.sort(function (a, b) {
+        if (a.artist < b.artist) { return -1; }
+        if (a.artist > b.artist) { return 1; }
+        return 0;
+    })
     const [soundRecordingInput, setSoundRecordingInput] = useState([]);
+    soundRecordingInput.sort(function (a, b) {
+        if (a.artist < b.artist) { return -1; }
+        if (a.artist > b.artist) { return 1; }
+        return 0;
+    })
     const [soundRecordingMatched, setSoundRecordingMatched] = useState([]);
+    soundRecordingMatched.sort(function (a, b) {
+        if (a.artist < b.artist) { return -1; }
+        if (a.artist > b.artist) { return 1; }
+        return 0;
+    })
     const [filteredResults, setFilteredResults] = useState([]);
     const [filterSong, setFilterSong] = useState(emptySong);
 
@@ -41,17 +56,26 @@ function SearchDB() {
     useEffect(() => {
         var results = soundDatabase;
         results = soundDatabase.filter(function (song) {
-            return song.title.toUpperCase().includes(filterSong.title.toUpperCase()) || song.artist.toUpperCase().includes(filterSong.artist.toUpperCase());
+            return song.title.toUpperCase().includes(filterSong.title.toUpperCase()) || song.artist.toUpperCase().includes(filterSong.artist.toUpperCase()) || song.isrc.toUpperCase().includes(filterSong.isrc.toUpperCase()) || song.duration.includes(filterSong.duration);
         });
         setFilteredResults(results);
 
     }, [filterSong, soundDatabase]);
 
+    useEffect(() => {
+        var results = soundDatabase;
+        results = soundDatabase.filter(function (song) {
+            return (song.title.toUpperCase().includes(selectedSong.title.toUpperCase()) || selectedSong.title.toUpperCase().includes(song.title.toUpperCase())) && (song.artist.toUpperCase().includes(selectedSong.artist.toUpperCase()) || selectedSong.artist.toUpperCase().includes(song.artist.toUpperCase()));
+        });
+        setFilteredResults(results);
+
+    }, [selectedSong, soundDatabase]);
+
 
 
     const onTyping = (e) => {
         const value = e.target.value;
-        var songObject = { 'title': value, 'artist': value };
+        var songObject = { 'title': value, 'artist': value, 'isrc': value, 'duration': value };
         setManualInput(value);
         setFilterSong(songObject);
     }
@@ -71,6 +95,7 @@ function SearchDB() {
         setSoundRecordingInput([...soundRecordingInput]);
         setSelectedSong(emptySong);
         setFilterSong(emptySong)
+        setManualInput('');
 
     }
 
@@ -81,11 +106,13 @@ function SearchDB() {
         setSoundRecordingMatched([...soundRecordingMatched]);
 
         setSoundRecordingInput([...soundRecordingInput, song]);
+        setSelectedSong(emptySong);
+        setFilterSong(emptySong)
+        setManualInput('');
     }
 
     const onSelectedRow = (song) => {
         setSelectedSong(song);
-        setFilterSong(song);
     }
 
     return (
@@ -101,10 +128,10 @@ function SearchDB() {
                         <AddSong msg="Add new song to database" submitSong={submitSong} paramSong={{ 'title': '', 'artist': '', 'isrc': '', 'duration': '' }} />
                         <Row>
                             <Col>
-                                <InputTable onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
+                                <InputTable selectedSong={selectedSong} onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
                             </Col>
                             <Col>
-                                <ResultTable selectedSong={selectedSong} submitSong={submitSong} filteredResults={filteredResults} match={match}  onTyping={onTyping} manualInput={manualInput} />
+                                <ResultTable selectedSong={selectedSong} submitSong={submitSong} filteredResults={filteredResults} match={match} onTyping={onTyping} manualInput={manualInput} />
                             </Col>
 
                         </Row>

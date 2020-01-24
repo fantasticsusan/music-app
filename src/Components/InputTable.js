@@ -8,10 +8,9 @@ function InputTable(params) {
     const soundRecordingInputReport = params.soundRecordingInputReport;
     const onSelectedRow = params.onSelectedRow;
 
-    const [selectedSong, setSelectedSong] = useState({ 'title': '', 'artist': '', 'isrc': '', 'duration': '' });
+    const selectedSong = params.selectedSong || { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
 
     const handleClick = (song) => {
-        setSelectedSong(song);
         onSelectedRow(song);
     }
 

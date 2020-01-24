@@ -16,8 +16,12 @@ function ResultTable(params) {
     const onTyping = params.onTyping;
     const manualInput = params.manualInput;
     const submitSong = params.submitSong;
-    const selectedSong = params.selectedSong;
-    console.log("Selected song ", selectedSong);
+    var selectedSong = params.selectedSong;
+
+    const match_selected = (song) => {
+        selectedSong = {};
+        match(song);
+    }
     return (
         <div>
             <Col>
@@ -63,7 +67,7 @@ function ResultTable(params) {
                                                 {selectedSong.title === "" ?
                                                     <td><Button disabled className="match_disabled" variant="secondary" onClick={() => match(song)}><i className="fas fa-check-circle"></i></Button></td>
                                                     :
-                                                    <td><Button className="match" variant="secondary" onClick={() => match(song)}><i className="fas fa-check-circle"></i></Button></td>
+                                                    <td><Button className="match" variant="secondary" onClick={() => match_selected(song)}><i className="fas fa-check-circle"></i></Button></td>
                                                 }
                                             </tr>)
                                     })}

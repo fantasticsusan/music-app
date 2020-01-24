@@ -85,6 +85,7 @@
 
 .custom_row:hover{
   font-weight: bold;
+  cursor: pointer;
 }
 
 .selected_row{
