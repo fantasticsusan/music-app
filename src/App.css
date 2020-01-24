@@ -74,7 +74,7 @@
   text-align: center;
 }
 
-.alertSucess{
+.alert_custom{
   padding:20px;
   margin:20px;
 }
@@ -85,4 +85,20 @@
 
 .custom_row:hover{
   font-weight: bold;
+}
+
+.selected_row{
+  background-color:#37474f !important;
+  color:white;
+}
+.selected_row:hover   {
+  background-color:#37474f !important;
+  color:white !important;
+}
+
+.match:hover{
+  background-color: green !important;
+}
+.match_disabled:hover{
+  background-color: none;
 }

@@ -5,9 +5,7 @@ import sound_recording_input_report from '../files/sound_recordings_input_report
 import {
     Spinner,
     Col,
-    Row,
-    Alert,
-    Button
+    Row
 } from 'react-bootstrap';
 import AddSong from './AddSong';
 import MatchTable from './MatchTable';
@@ -15,22 +13,18 @@ import InputTable from './InputTable';
 import ResultTable from './ResultTable';
 function SearchDB() {
 
+    const emptySong = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
+
     const [soundDatabase, setSoundDatabase] = useState([]);
     const [soundRecordingInput, setSoundRecordingInput] = useState([]);
     const [soundRecordingMatched, setSoundRecordingMatched] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
-    const [filterSong, setFilterSong] = useState({ 'title': '', 'artist': '' });
-
-    /* Messages and errors */
-    const [emptyError, setEmptyError] = useState(false);
-    const [successfulMsg, setSuccessfulMsg] = useState(false);
-
-    /* Collapse */
-    const [open, setOpen] = useState(false);
+    const [filterSong, setFilterSong] = useState(emptySong);
 
     /* Controled inputs */
     const [manualInput, setManualInput] = useState('');
-    const [selectInput, setSelectInput] = useState('-1');
+    const [selectedSong, setSelectedSong] = useState(emptySong);
+
 
     useEffect(() => {
         d3.csv(sound_recording, function (res) {
@@ -49,32 +43,13 @@ function SearchDB() {
         results = soundDatabase.filter(function (song) {
             return song.title.toUpperCase().includes(filterSong.title.toUpperCase()) || song.artist.toUpperCase().includes(filterSong.artist.toUpperCase());
         });
-
-        if (results.length === 0) {
-            setEmptyError(true);
-        } else {
-            setEmptyError(false);
-        }
-
         setFilteredResults(results);
 
     }, [filterSong, soundDatabase]);
 
-    const handleChange = (e) => {
-        clearManualInput();
-        const value = e.target.value;
-        setSelectInput(value);
-
-        if (value !== "-1") {
-            setFilterSong(soundRecordingInput[value]);
-        } else {
-            setFilterSong({ 'title': '', 'artist': '' });
-        }
-    }
 
 
     const onTyping = (e) => {
-        clearSelectInput();
         const value = e.target.value;
         var songObject = { 'title': value, 'artist': value };
         setManualInput(value);
@@ -83,33 +58,20 @@ function SearchDB() {
 
     const submitSong = (song) => {
         setSoundDatabase([...soundDatabase, song]);
-        setOpen(false);
-        clearFilters();
-        setSuccessfulMsg(true);
-    }
-
-    const clearSelectInput = () => {
-        setFilteredResults(soundDatabase);
-        setSelectInput('');
-    }
-
-    const clearManualInput = () => {
-        setFilteredResults(soundDatabase);
+        setFilterSong(emptySong)
         setManualInput('');
     }
 
-    const clearFilters = () => {
-        clearSelectInput();
-        clearManualInput();
-        setFilterSong({ 'title': '', 'artist': '' });
-    }
 
-    const match = (song) => {
-        const index = soundDatabase.indexOf(song);
-        setSoundRecordingMatched([...soundRecordingMatched, song]);
+    const match = () => {
+        const index = soundRecordingInput.indexOf(selectedSong);
+        setSoundRecordingMatched([...soundRecordingMatched, selectedSong]);
 
-        soundDatabase.splice(index, 1);
-        setSoundDatabase([...soundDatabase]);
+        soundRecordingInput.splice(index, 1);
+        setSoundRecordingInput([...soundRecordingInput]);
+        setSelectedSong(emptySong);
+        setFilterSong(emptySong)
+
     }
 
     const deleteMatch = (song) => {
@@ -118,11 +80,12 @@ function SearchDB() {
         soundRecordingMatched.splice(index, 1);
         setSoundRecordingMatched([...soundRecordingMatched]);
 
-        setSoundDatabase([...soundDatabase, song]);
+        setSoundRecordingInput([...soundRecordingInput, song]);
     }
 
     const onSelectedRow = (song) => {
-        console.log("You have selected ", song)
+        setSelectedSong(song);
+        setFilterSong(song);
     }
 
     return (
@@ -135,24 +98,13 @@ function SearchDB() {
                     :
                     <>
 
-                        <Button variant="primary" onClick={() => setOpen(!open)}><i className="fas fa-plus-circle"></i> Add a song manually</Button>
-                        <AddSong open={open} submitSong={submitSong} />
-                        {successfulMsg === true ?
-                            <div class="alertSucess">
-                                <Alert variant="success" onClose={() => setSuccessfulMsg(false)} dismissible>
-                                    <Alert.Heading>BOOM SHAKALAKA!</Alert.Heading>
-                                    <p>Your song was successfully added!</p>
-                                </Alert>
-                            </div>
-                            :
-                            ''
-                        }
+                        <AddSong msg="Add new song to database" submitSong={submitSong} paramSong={{ 'title': '', 'artist': '', 'isrc': '', 'duration': '' }} />
                         <Row>
                             <Col>
-                                <InputTable onSelectedRow={onSelectedRow} clearFilters={clearFilters} soundRecordingInputReport={soundRecordingInput} selectInput={selectInput} handleChange={handleChange} onTyping={onTyping} manualInput={manualInput} />
+                                <InputTable onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
                             </Col>
                             <Col>
-                                <ResultTable filteredResults={filteredResults} match={match} emptyError={emptyError} onTyping={onTyping} manualInput={manualInput} />
+                                <ResultTable selectedSong={selectedSong} submitSong={submitSong} filteredResults={filteredResults} match={match}  onTyping={onTyping} manualInput={manualInput} />
                             </Col>
 
                         </Row>

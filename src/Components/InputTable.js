@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-    Table,
-    Button
+    Table
 } from 'react-bootstrap';
 
 function InputTable(params) {
 
-    const selectInput = params.selectInput;
-    const handleChange = params.handleChange;
-    const onTyping = params.onTyping;
-    const manualInput = params.manualInput;
     const soundRecordingInputReport = params.soundRecordingInputReport;
     const onSelectedRow = params.onSelectedRow;
+
+    const [selectedSong, setSelectedSong] = useState({ 'title': '', 'artist': '', 'isrc': '', 'duration': '' });
+
+    const handleClick = (song) => {
+        setSelectedSong(song);
+        onSelectedRow(song);
+    }
 
     return (
         <div>
             <div className="center">
                 <h2 className="subtitle">INPUT</h2>
                 <p>Total input: {soundRecordingInputReport.length}</p>
+                <p>Please select one song</p>
             </div>
             <Table striped bordered hover>
                 <thead>
@@ -26,28 +29,25 @@ function InputTable(params) {
                         <th>Artist</th>
                         <th>ISRC</th>
                         <th>Duration</th>
-                        <th>Select</th>
                     </tr>
                 </thead>
                 <tbody>
                     {soundRecordingInputReport.map((song, index) => {
                         return (
-                            <tr className="custom_row" key={index} onClick={() => onSelectedRow(song)}>
+                            <tr onClick={() => handleClick(song)} className={song === selectedSong ? "selected_row" : "custom_row"} key={index}>
                                 <td>{song.title}</td>
                                 <td>{song.artist}</td>
                                 <td>{song.isrc}</td>
                                 <td>{song.duration}</td>
-                                <td>X</td>
-                                {/* <td><Button variant="danger" onClick={() => deleteMatch(song, index)}><i className="fas fa-trash-alt"></i></Button></td> */}
                             </tr>)
                     })}
                 </tbody>
             </Table>
         </div>
-                // <Form.Control  className="mr-sm-2" value={selectInput} as="select" onChange={handleChange}>
-                //     <option value="-1">Choose one...</option>
-                //     {renderOptions()}
-                // </Form.Control>
+        // <Form.Control  className="mr-sm-2" value={selectInput} as="select" onChange={handleChange}>
+        //     <option value="-1">Choose one...</option>
+        //     {renderOptions()}
+        // </Form.Control>
     );
 }
 export default InputTable;

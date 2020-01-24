@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Table,
     Form,
     Alert,
     Row,
-    Col
+    Col,
+    Button
 } from 'react-bootstrap';
-
+import AddSong from './AddSong';
 
 function ResultTable(params) {
 
     const filteredResults = params.filteredResults;
     const match = params.match;
-    const emptyError = params.emptyError;
     const onTyping = params.onTyping;
     const manualInput = params.manualInput;
-
+    const submitSong = params.submitSong;
+    const selectedSong = params.selectedSong;
+    console.log("Selected song ", selectedSong);
     return (
         <div>
             <Col>
@@ -32,8 +34,13 @@ function ResultTable(params) {
                 <Row>
 
                     {
-                        emptyError === true ?
-                            <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
+                        filteredResults.length === 0 ?
+                            <Col>
+                                <div class="alert_custom">
+                                    <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
+                                </div>
+                                <AddSong msg="Add selected song to database" submitSong={submitSong} paramSong={selectedSong} />
+                            </Col>
                             :
                             <Table striped bordered hover>
                                 <thead>
@@ -53,7 +60,11 @@ function ResultTable(params) {
                                                 <td>{song.artist}</td>
                                                 <td>{song.isrc}</td>
                                                 <td>{song.duration}</td>
-                                                <td><input type="checkbox" onClick={() => match(song)}></input></td>
+                                                {selectedSong.title === "" ?
+                                                    <td><Button disabled className="match_disabled" variant="secondary" onClick={() => match(song)}><i className="fas fa-check-circle"></i></Button></td>
+                                                    :
+                                                    <td><Button className="match" variant="secondary" onClick={() => match(song)}><i className="fas fa-check-circle"></i></Button></td>
+                                                }
                                             </tr>)
                                     })}
                                 </tbody>
