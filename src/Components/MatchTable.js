@@ -12,7 +12,7 @@ function MatchTable(param) {
     const deleteMatch = param.deleteMatch;
 
     return (
-        <div>
+        <div className="table-match-container">
             <div className="table-header">
                 <h2 className="subtitle"><i className="fas fa-database"></i> Registry</h2>
                 <div className="table-header-body">
