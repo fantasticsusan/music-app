@@ -139,10 +139,9 @@ function SearchDB() {
                     </Spinner>
                     :
                     <>
-                        <div className="d-flex justify-content-end">
+                        <Row>
                             <AddSong msg="Add new song to database" submitSong={submitSong} paramSong={{ 'title': '', 'artist': '', 'isrc': '', 'duration': '' }} />
-                        </div>
-
+                        </Row>
                         <Row>
                             <Col xs={6}>
                                 <InputTable selectedSong={selectedSong} onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
