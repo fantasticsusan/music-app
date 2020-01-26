@@ -38,11 +38,11 @@ function AddSong(params) {
         <div>
             <Row>
                 <div className="col ml-auto">
-                    <Button variant="primary" onClick={() => setOpen(!open)}><i className="fas fa-plus-circle"></i> {msg}</Button>
+                    <button className="button" onClick={() => setOpen(!open)}><i className="fas fa-plus-circle"></i> {msg}</button>
                 </div>
             </Row>
             <Collapse in={open}>
-                <Form className="formContainer" onSubmit={submitSong}>
+                <Form className="form-container" onSubmit={submitSong}>
                     <Form.Row>
                         <Form.Group as={Col} onChange={handleChange} controlId="formGridTitle">
                             <Form.Label>Title</Form.Label>
@@ -65,13 +65,13 @@ function AddSong(params) {
                         </Form.Group>
                     </Form.Row>
                     <div className="center">
-                        <Button variant="primary" type="submit">Finish</Button>
+                        <button className="button" type="submit">Finish</button>
                     </div>
                 </Form>
             </Collapse>
             {
                 successfulMsg === true ?
-                    <div class="alert_custom">
+                    <div class="custom-alert">
                         <Alert variant="success" onClose={() => setSuccessfulMsg(false)} dismissible>
                             <Alert.Heading>BOOM SHAKALAKA!</Alert.Heading>
                             <p>Your song was successfully added!</p>

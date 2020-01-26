@@ -20,17 +20,22 @@ function ResultTable(params) {
     var selectedSong = params.selectedSong;
 
     const match_selected = (song) => {
-        selectedSong = {};
-        match(song);
+        if (selectedSong.title !== "") {
+            selectedSong = {};
+            match(song);
+        }
     }
     return (
         <div>
             <Col>
                 <Row>
-                    <div className="center">
-                        <h2 className="subtitle">Database</h2>
-                        <p>Total results: {filteredResults.length}</p>
-
+                    <Col>
+                    </Col>
+                    <div className="input-header">
+                    <h2 className="subtitle"><i className="fas fa-database"></i> Database</h2>
+                        <div className="input-header-body">
+                        <p>Total results:  <strong>{filteredResults.length}</strong></p>
+                        </div>
                     </div>
                 </Row>
                 <Row>
@@ -46,7 +51,7 @@ function ResultTable(params) {
                     {
                         filteredResults.length === 0 ?
                             <Col>
-                                <div class="alert_custom">
+                                <div className="alert-custom">
                                     <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
                                 </div>
                                 {selectedSong.title !== "" ?
@@ -55,33 +60,31 @@ function ResultTable(params) {
                                 }
                             </Col>
                             :
-                            <Table striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Artist</th>
-                                        <th>ISRC</th>
-                                        <th>Duration</th>
-                                        <th>Match</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {filteredResults.map((song, index) => {
-                                        return (
-                                            <tr key={index}>
-                                                <td>{song.title}</td>
-                                                <td>{song.artist}</td>
-                                                <td>{song.isrc}</td>
-                                                <td>{song.duration}</td>
-                                                {selectedSong.title === "" ?
-                                                    <td><Button disabled className="match_disabled" variant="secondary" onClick={() => match(song)}><i className="fas fa-check-circle"></i></Button></td>
-                                                    :
-                                                    <td><Button className="match" variant="secondary" onClick={() => match_selected(song)}><i className="fas fa-check-circle"></i></Button></td>
-                                                }
-                                            </tr>)
-                                    })}
-                                </tbody>
-                            </Table>}
+                            <div className="table-scrollable">
+
+                                <Table striped>
+                                    <thead>
+                                        <tr>
+                                            <th className="thead-custom">Title</th>
+                                            <th className="thead-custom">Artist</th>
+                                            <th className="thead-custom">ISRC</th>
+                                            <th className="thead-custom">Duration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredResults.map((song, index) => {
+                                            return (
+                                                <tr onClick={() => match_selected(song)} className={selectedSong.title === "" ? "" : "custom-row"} key={index}>
+                                                    <td>{song.title}</td>
+                                                    <td>{song.artist}</td>
+                                                    <td>{song.isrc}</td>
+                                                    <td>{song.duration}</td>
+                                                </tr>)
+                                        })}
+                                    </tbody>
+                                </Table>
+                            </div>
+                    }
                 </Row>
             </Col>
         </div>

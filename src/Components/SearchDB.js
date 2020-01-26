@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as d3 from "d3";
-import sound_recording from '../files/sound_recordings.csv';
-import sound_recording_input_report from '../files/sound_recordings_input_report.csv';
+import soundRecordingFile from '../files/sound_recordings.csv';
+import soundRecordingInputReportFile from '../files/sound_recordings_input_report.csv';
 import {
     Spinner,
     Col,
@@ -19,7 +19,7 @@ function SearchDB() {
     soundDatabase.sort(function (a, b) {
         if (a.artist < b.artist) { return -1; }
         if (a.artist > b.artist) { return 1; }
-        if  (a.artist === b.artist){
+        if (a.artist === b.artist) {
             if (a.title < b.title) { return -1; }
             if (a.title > b.title) { return 1; }
         }
@@ -29,7 +29,7 @@ function SearchDB() {
     soundRecordingInput.sort(function (a, b) {
         if (a.artist < b.artist) { return -1; }
         if (a.artist > b.artist) { return 1; }
-        if  (a.artist === b.artist){
+        if (a.artist === b.artist) {
             if (a.title < b.title) { return -1; }
             if (a.title > b.title) { return 1; }
         }
@@ -39,7 +39,7 @@ function SearchDB() {
     soundRecordingMatched.sort(function (a, b) {
         if (a.artist < b.artist) { return -1; }
         if (a.artist > b.artist) { return 1; }
-        if  (a.artist === b.artist){
+        if (a.artist === b.artist) {
             if (a.title < b.title) { return -1; }
             if (a.title > b.title) { return 1; }
         }
@@ -54,20 +54,19 @@ function SearchDB() {
 
 
     useEffect(() => {
-        d3.csv(sound_recording, function (res) {
-            setSoundDatabase(res);
-            setFilteredResults(res);
+        d3.csv(soundRecordingFile, function (response) {
+            setSoundDatabase(response);
+            setFilteredResults(response);
         });
 
-        d3.csv(sound_recording_input_report, function (res) {
-            setSoundRecordingInput(res);
+        d3.csv(soundRecordingInputReportFile, function (response) {
+            setSoundRecordingInput(response);
         });
 
     }, []);
 
     useEffect(() => {
-        var results = soundDatabase;
-        results = soundDatabase.filter(function (song) {
+        const results = soundDatabase.filter(function (song) {
             return song.title.toUpperCase().includes(filterSong.title.toUpperCase()) || song.artist.toUpperCase().includes(filterSong.artist.toUpperCase()) || song.isrc.toUpperCase().includes(filterSong.isrc.toUpperCase()) || song.duration.includes(filterSong.duration);
         });
         setFilteredResults(results);
@@ -75,8 +74,7 @@ function SearchDB() {
     }, [filterSong, soundDatabase]);
 
     useEffect(() => {
-        var results = soundDatabase;
-        results = soundDatabase.filter(function (song) {
+        const results = soundDatabase.filter(function (song) {
             return (song.title.toUpperCase().includes(selectedSong.title.toUpperCase()) || selectedSong.title.toUpperCase().includes(song.title.toUpperCase())) && (song.artist.toUpperCase().includes(selectedSong.artist.toUpperCase()) || selectedSong.artist.toUpperCase().includes(song.artist.toUpperCase()));
         });
         setFilteredResults(results);
@@ -87,7 +85,7 @@ function SearchDB() {
 
     const onTyping = (e) => {
         const value = e.target.value;
-        var songObject = { 'title': value, 'artist': value, 'isrc': value, 'duration': value };
+        let songObject = { 'title': value, 'artist': value, 'isrc': value, 'duration': value };
         setManualInput(value);
         setFilterSong(songObject);
     }
@@ -131,7 +129,7 @@ function SearchDB() {
 
     return (
         <>
-            <div className="container_div">
+            <div className="body-container">
                 {soundDatabase === undefined || soundDatabase.length === 0 ?
                     <Spinner animation="border" role="status">
                         <span className="sr-only">Loading...</span>
@@ -139,7 +137,10 @@ function SearchDB() {
                     :
                     <>
 
-                        <AddSong msg="Add new song to database" submitSong={submitSong} paramSong={{ 'title': '', 'artist': '', 'isrc': '', 'duration': '' }} />
+                        <div className="d-flex justify-content-end">
+                            <AddSong msg="Add new song to database" submitSong={submitSong} paramSong={{ 'title': '', 'artist': '', 'isrc': '', 'duration': '' }} />
+                        </div>
+
                         <Row>
                             <Col>
                                 <InputTable selectedSong={selectedSong} onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />

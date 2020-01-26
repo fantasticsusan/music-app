@@ -5,6 +5,7 @@ class Header extends React.Component {
         return (
             <div className="header" >
                <h1 className="title">Music app <i className="fas fa-music"></i></h1>
+               <hr/>
             </div>
         );
     }

@@ -22,7 +22,7 @@ function MatchTable(param) {
                         <th>Artist</th>
                         <th>ISRC</th>
                         <th>Duration</th>
-                        <th>Delete</th>
+                        <th>Unmatch</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,7 +33,7 @@ function MatchTable(param) {
                                 <td>{song.artist}</td>
                                 <td>{song.isrc}</td>
                                 <td>{song.duration}</td>
-                                <td><Button variant="danger" onClick={() => deleteMatch(song, index)}><i className="fas fa-trash-alt"></i></Button></td>
+                                <td><Button variant="danger" onClick={() => deleteMatch(song, index)}><i className="fas fa-undo-alt"></i></Button></td>
                             </tr>)
                     })}
                 </tbody>
