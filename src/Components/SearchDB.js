@@ -143,16 +143,18 @@ function SearchDB() {
                         </div>
 
                         <Row>
-                            <Col>
+                            <Col xs={6}>
                                 <InputTable selectedSong={selectedSong} onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
                             </Col>
-                            <Col>
+                            <Col xs={6}>
                                 <ResultTable selectedSong={selectedSong} submitSong={submitSong} filteredResults={filteredResults} match={match} onTyping={onTyping} manualInput={manualInput} />
                             </Col>
 
                         </Row>
                         <Row>
-                            <MatchTable soundRecordingMatched={soundRecordingMatched} deleteMatch={deleteMatch} />
+                            <Col xs={12}>
+                                <MatchTable soundRecordingMatched={soundRecordingMatched} deleteMatch={deleteMatch} />
+                            </Col>
                         </Row>
                     </>
                 }

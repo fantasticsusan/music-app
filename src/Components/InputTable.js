@@ -20,43 +20,45 @@ function InputTable(params) {
     }
 
     return (
-        <Col>
+        <>
             <Row>
                 <Col>
-                    <div className="input-header">
+                    <div className="table-header table-header-input">
                         <h2 className="subtitle"><i className="fas fa-file-alt"></i> INPUT</h2>
-                        <div className="input-header-body">
+                        <div className="table-header-body">
                             <p>Total: <strong>{soundRecordingInputReport.length}</strong></p>
                         </div>
                     </div>
                 </Col>
             </Row>
             <Row>
-                <div className="table-scrollable">
-                    <Table striped>
-                        <thead>
-                            <tr>
-                                <th className="thead-custom">Title</th>
-                                <th className="thead-custom">Artist</th>
-                                <th className="thead-custom">ISRC</th>
-                                <th className="thead-custom">Duration</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {soundRecordingInputReport.map((song, index) => {
-                                return (
-                                    <tr onClick={() => handleClick(song)} className={song === selectedSong ? "selected-row" : "custom-row"} key={index}>
-                                        <td>{song.title}</td>
-                                        <td>{song.artist}</td>
-                                        <td>{song.isrc}</td>
-                                        <td>{song.duration}</td>
-                                    </tr>)
-                            })}
-                        </tbody>
-                    </Table>
-                </div>
+                <Col xs={12}>
+                    <div className="table-scrollable">
+                        <Table striped>
+                            <thead>
+                                <tr>
+                                    <th className="thead-custom">Title</th>
+                                    <th className="thead-custom">Artist</th>
+                                    <th className="thead-custom">ISRC</th>
+                                    <th className="thead-custom">Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {soundRecordingInputReport.map((song, index) => {
+                                    return (
+                                        <tr onClick={() => handleClick(song)} className={song === selectedSong ? "selected-row" : "custom-row"} key={index}>
+                                            <td>{song.title}</td>
+                                            <td>{song.artist}</td>
+                                            <td>{song.isrc}</td>
+                                            <td>{song.duration}</td>
+                                        </tr>)
+                                })}
+                            </tbody>
+                        </Table>
+                    </div>
+                </Col>
             </Row>
-        </Col>
+        </>
     );
 }
 export default InputTable;

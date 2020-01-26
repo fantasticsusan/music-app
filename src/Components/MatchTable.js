@@ -12,8 +12,11 @@ function MatchTable(param) {
 
     return (
         <div>
-            <div className="center">
-                <h2 className="subtitle">Registry</h2>
+            <div className="table-header">
+                <h2 className="subtitle"><i className="fas fa-database"></i> Registry</h2>
+                <div className="table-header-body">
+                    <p>Total matchs:  <strong>{soundRecordingMatched.length}</strong></p>
+                </div>
             </div>
             <Table className="match-table" striped bordered hover>
                 <thead>

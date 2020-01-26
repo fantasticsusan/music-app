@@ -94,8 +94,7 @@ hr {
 }
 
 .table-header-body {
-    padding: 10px 10px 20px 10px;
-    margin-bottom: 25px;
+    padding: 10px;
 }
 .table-scrollable thead th {
     position: sticky;
@@ -116,4 +115,13 @@ hr {
 
 .match-table{
     width:100%;
+}
+
+.table-header{
+    text-align: left;
+    align-items: flex-start;
+}
+
+.table-header-input {
+    margin-bottom:55px;
 }
