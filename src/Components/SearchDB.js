@@ -103,8 +103,9 @@ function SearchDB() {
 
         soundRecordingInput.splice(index, 1);
         setSoundRecordingInput([...soundRecordingInput]);
+
         setSelectedSong(emptySong);
-        setFilterSong(emptySong)
+        setFilterSong(emptySong);
         setManualInput('');
 
     }
@@ -117,13 +118,14 @@ function SearchDB() {
 
         setSoundRecordingInput([...soundRecordingInput, song]);
         setSelectedSong(emptySong);
-        setFilterSong(emptySong)
+        setFilterSong(emptySong);
         setManualInput('');
     }
 
     const onSelectedRow = (song) => {
         setManualInput('');
-        setFilterSong(emptySong)
+        setFilterSong(emptySong);
+
         setSelectedSong(song);
     }
 
@@ -136,7 +138,6 @@ function SearchDB() {
                     </Spinner>
                     :
                     <>
-
                         <div className="d-flex justify-content-end">
                             <AddSong msg="Add new song to database" submitSong={submitSong} paramSong={{ 'title': '', 'artist': '', 'isrc': '', 'duration': '' }} />
                         </div>

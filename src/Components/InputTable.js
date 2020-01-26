@@ -15,10 +15,8 @@ function InputTable(params) {
     const selectedSong = params.selectedSong || emptySong;
 
     const handleClick = (newSelectedSong) => {
-
         let song = newSelectedSong === selectedSong ? emptySong : newSelectedSong;
         onSelectedRow(song);
-
     }
 
     return (

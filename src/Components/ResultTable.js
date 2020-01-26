@@ -5,22 +5,25 @@ import {
     Alert,
     Row,
     Col,
-    Button,
     InputGroup
 } from 'react-bootstrap';
 import AddSong from './AddSong';
 
 function ResultTable(params) {
 
+    const emptyTitleSong = "";
+
+
     const filteredResults = params.filteredResults;
     const match = params.match;
     const onTyping = params.onTyping;
     const manualInput = params.manualInput;
     const submitSong = params.submitSong;
-    var selectedSong = params.selectedSong;
+    let selectedSong = params.selectedSong;
 
-    const match_selected = (song) => {
-        if (selectedSong.title !== "") {
+    const matchSong = (song) => {
+
+        if (selectedSong.title !== emptyTitleSong) {
             selectedSong = {};
             match(song);
         }
@@ -32,9 +35,9 @@ function ResultTable(params) {
                     <Col>
                     </Col>
                     <div className="input-header">
-                    <h2 className="subtitle"><i className="fas fa-database"></i> Database</h2>
+                        <h2 className="subtitle"><i className="fas fa-database"></i> Database</h2>
                         <div className="input-header-body">
-                        <p>Total results:  <strong>{filteredResults.length}</strong></p>
+                            <p>Total results:  <strong>{filteredResults.length}</strong></p>
                         </div>
                     </div>
                 </Row>
@@ -74,7 +77,7 @@ function ResultTable(params) {
                                     <tbody>
                                         {filteredResults.map((song, index) => {
                                             return (
-                                                <tr onClick={() => match_selected(song)} className={selectedSong.title === "" ? "" : "custom-row"} key={index}>
+                                                <tr onClick={() => matchSong(song)} className={selectedSong.title !== emptyTitleSong ? "custom-row" : ""} key={index}>
                                                     <td>{song.title}</td>
                                                     <td>{song.artist}</td>
                                                     <td>{song.isrc}</td>

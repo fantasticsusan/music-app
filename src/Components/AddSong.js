@@ -9,13 +9,15 @@ import {
 } from 'react-bootstrap';
 
 function AddSong(params) {
-    // const open = params.open;
+
+    const emptySong = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
+
     const submitSongDB = params.submitSong;
     const paramSong = params.paramSong;
     const msg = params.msg || "Add song";
-
     const [song, setSong] = useState(paramSong);
     const [successfulMsg, setSuccessfulMsg] = useState(false);
+    
     const [open, setOpen] = useState(false);
 
     const submitSong = (e) => {
@@ -23,7 +25,7 @@ function AddSong(params) {
         submitSongDB(song);
         setOpen(false);
         setSuccessfulMsg(true);
-        setSong({ 'title': '', 'artist': '', 'isrc': '', 'duration': '' });
+        setSong(emptySong);
     }
 
     const handleChange = (e) => {

@@ -15,7 +15,7 @@ function MatchTable(param) {
             <div className="center">
                 <h2 className="subtitle">Registry</h2>
             </div>
-            <Table striped bordered hover>
+            <Table className="match-table" striped bordered hover>
                 <thead>
                     <tr>
                         <th>Title</th>
