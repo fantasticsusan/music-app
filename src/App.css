@@ -111,17 +111,35 @@ hr {
     padding: 3px;
     margin-top: 30px;
     border-top: none !important;
+    width: 30%;
 }
 
-.match-table{
+.column-width-small {
+    width: 10%;
+}
+
+.match-table {
     width:100%;
 }
 
-.table-header{
+.table-header {
     text-align: left;
     align-items: flex-start;
 }
 
 .table-header-input {
-    margin-bottom:55px;
+    margin-bottom:65px;
+}
+
+.items-result {
+    color:grey;
+    text-align: right;
+}
+
+.badge {
+    font-size: larger !important;
+}
+
+.search-input {
+    padding: 0 20px 0 20px;
 }

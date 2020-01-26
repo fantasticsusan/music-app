@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     Table,
-    Button
+    Button,
+    Badge
 } from 'react-bootstrap';
 
 
@@ -15,7 +16,7 @@ function MatchTable(param) {
             <div className="table-header">
                 <h2 className="subtitle"><i className="fas fa-database"></i> Registry</h2>
                 <div className="table-header-body">
-                    <p>Total matchs:  <strong>{soundRecordingMatched.length}</strong></p>
+                    <p><Badge variant="light">{soundRecordingMatched.length}</Badge> total matches</p>
                 </div>
             </div>
             <Table className="match-table" striped bordered hover>

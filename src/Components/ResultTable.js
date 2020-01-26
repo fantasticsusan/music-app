@@ -5,7 +5,8 @@ import {
     Alert,
     Row,
     Col,
-    InputGroup
+    InputGroup,
+    Badge
 } from 'react-bootstrap';
 import AddSong from './AddSong';
 
@@ -13,8 +14,9 @@ function ResultTable(params) {
 
     const emptyTitleSong = "";
 
+    const soundDatabase = params.soundDatabase || [];
 
-    const filteredResults = params.filteredResults;
+    const filteredResults = params.filteredResults || [];
     const match = params.match;
     const onTyping = params.onTyping;
     const manualInput = params.manualInput;
@@ -35,19 +37,27 @@ function ResultTable(params) {
                 <Col>
                     <div className="table-header">
                         <h2 className="subtitle"><i className="fas fa-database"></i> Database</h2>
-                        <div className="table-header-body">
-                            <p>Total results:  <strong>{filteredResults.length}</strong></p>
-                        </div>
                     </div>
                 </Col>
             </Row>
             <Row>
-                <InputGroup className="mb-3">
-                    <InputGroup.Prepend>
-                        <InputGroup.Text id="basic-addon1"><i className="fas fa-search"></i></InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <Form.Control value={manualInput} placeholder="Search database..." onChange={onTyping} />
-                </InputGroup>
+                <Col>
+                    <div className="search-input">
+                        <InputGroup className="mb-3">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1"><i className="fas fa-search"></i></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <Form.Control value={manualInput} placeholder="Search by title, artist, ISRC or duration" onChange={onTyping} />
+                        </InputGroup>
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <div className="items-result">
+                        <p>Showing <Badge variant="light">{filteredResults.length}</Badge> out of <Badge variant="light">{soundDatabase.length}</Badge> entries</p>
+                    </div>
+                </Col>
             </Row>
             <Row>
 
@@ -63,30 +73,32 @@ function ResultTable(params) {
                             }
                         </Col>
                         :
-                        <div className="table-scrollable">
+                        <>
+                            <div className="table-scrollable">
 
-                            <Table striped>
-                                <thead>
-                                    <tr>
-                                        <th className="thead-custom">Title</th>
-                                        <th className="thead-custom">Artist</th>
-                                        <th className="thead-custom">ISRC</th>
-                                        <th className="thead-custom">Duration</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {filteredResults.map((song, index) => {
-                                        return (
-                                            <tr onClick={() => matchSong(song)} className={selectedSong.title !== emptyTitleSong ? "custom-row" : ""} key={index}>
-                                                <td>{song.title}</td>
-                                                <td>{song.artist}</td>
-                                                <td>{song.isrc}</td>
-                                                <td>{song.duration}</td>
-                                            </tr>)
-                                    })}
-                                </tbody>
-                            </Table>
-                        </div>
+                                <Table striped>
+                                    <thead>
+                                        <tr>
+                                            <th className="thead-custom">Title</th>
+                                            <th className="thead-custom">Artist</th>
+                                            <th className="thead-custom">ISRC</th>
+                                            <th className="thead-custom column-width-small">Duration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredResults.map((song, index) => {
+                                            return (
+                                                <tr onClick={() => matchSong(song)} className={selectedSong.title !== emptyTitleSong ? "custom-row" : ""} key={index}>
+                                                    <td>{song.title}</td>
+                                                    <td>{song.artist}</td>
+                                                    <td>{song.isrc}</td>
+                                                    <td>{song.duration}</td>
+                                                </tr>)
+                                        })}
+                                    </tbody>
+                                </Table>
+                            </div>
+                        </>
                 }
             </Row>
         </div>

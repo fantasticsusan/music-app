@@ -2,14 +2,15 @@ import React from 'react';
 import {
     Table,
     Row,
-    Col
+    Col,
+    Badge
 } from 'react-bootstrap';
 
 function InputTable(params) {
 
     const emptySong = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
 
-    const soundRecordingInputReport = params.soundRecordingInputReport;
+    const soundRecordingInputReport = params.soundRecordingInputReport || [];
     const onSelectedRow = params.onSelectedRow;
 
     const selectedSong = params.selectedSong || emptySong;
@@ -19,16 +20,22 @@ function InputTable(params) {
         onSelectedRow(song);
     }
 
+
     return (
         <>
             <Row>
                 <Col>
                     <div className="table-header table-header-input">
                         <h2 className="subtitle"><i className="fas fa-file-alt"></i> INPUT</h2>
-                        <div className="table-header-body">
-                            <p>Total: <strong>{soundRecordingInputReport.length}</strong></p>
-                        </div>
                     </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <div className="items-result">
+                        {/* <p><strong>{soundRecordingInputReport.length}</strong> songs left to be matched</p>                     */}
+                        <p><Badge variant="light">{soundRecordingInputReport.length}</Badge> songs left to be matched</p>                    
+                        </div>
                 </Col>
             </Row>
             <Row>
@@ -40,7 +47,7 @@ function InputTable(params) {
                                     <th className="thead-custom">Title</th>
                                     <th className="thead-custom">Artist</th>
                                     <th className="thead-custom">ISRC</th>
-                                    <th className="thead-custom">Duration</th>
+                                    <th className="thead-custom column-width-small">Duration</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,6 +62,7 @@ function InputTable(params) {
                                 })}
                             </tbody>
                         </Table>
+
                     </div>
                 </Col>
             </Row>

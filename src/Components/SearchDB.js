@@ -129,6 +129,7 @@ function SearchDB() {
         setSelectedSong(song);
     }
 
+    console.log("soundDatabase in searchDB ", soundDatabase);
     return (
         <>
             <div className="body-container">
@@ -147,7 +148,7 @@ function SearchDB() {
                                 <InputTable selectedSong={selectedSong} onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
                             </Col>
                             <Col xs={6}>
-                                <ResultTable selectedSong={selectedSong} submitSong={submitSong} filteredResults={filteredResults} match={match} onTyping={onTyping} manualInput={manualInput} />
+                                <ResultTable soundDatabase={soundDatabase} selectedSong={selectedSong} submitSong={submitSong} filteredResults={filteredResults} match={match} onTyping={onTyping} manualInput={manualInput} />
                             </Col>
 
                         </Row>
