@@ -7,13 +7,10 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.4.1",
-    "papaparse": "^5.1.1",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0-beta.16",
-    "react-csv-reader": "^2.0.2",
     "react-d3-library": "^1.1.8",
     "react-dom": "^16.12.0",
-    "react-papaparse": "^1.0.5",
     "react-scripts": "3.3.0"
   },
   "scripts": {
