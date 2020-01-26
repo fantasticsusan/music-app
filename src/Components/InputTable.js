@@ -61,7 +61,6 @@ function InputTable(params) {
                                 })}
                             </tbody>
                         </Table>
-
                     </div>
                 </Col>
             </Row>

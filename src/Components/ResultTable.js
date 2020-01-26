@@ -31,7 +31,7 @@ function ResultTable(params) {
         }
     }
     return (
-        <div>
+        <>
             <Row>
                 <Col>
                     <div className="table-header">
@@ -59,22 +59,21 @@ function ResultTable(params) {
                 </Col>
             </Row>
             <Row>
+                <Col xs={12}>
+                    {
+                        filteredResults.length === 0 ?
+                            <>
+                                <div className="alert-custom">
+                                    <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
+                                </div>
+                                {selectedSong.title !== "" ?
+                                    <AddSong msg="Add selected song to database" submitSong={submitSong} paramSong={selectedSong} />
+                                    : ''
+                                }
+                            </>
+                            :
 
-                {
-                    filteredResults.length === 0 ?
-                        <Col>
-                            <div className="alert-custom">
-                                <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
-                            </div>
-                            {selectedSong.title !== "" ?
-                                <AddSong msg="Add selected song to database" submitSong={submitSong} paramSong={selectedSong} />
-                                : ''
-                            }
-                        </Col>
-                        :
-                        <>
                             <div className="table-scrollable">
-
                                 <Table responsive striped>
                                     <thead>
                                         <tr>
@@ -97,10 +96,10 @@ function ResultTable(params) {
                                     </tbody>
                                 </Table>
                             </div>
-                        </>
-                }
+                    }
+                </Col>
             </Row>
-        </div>
+        </>
     );
 }
 export default ResultTable;
