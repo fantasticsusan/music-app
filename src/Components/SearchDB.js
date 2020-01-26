@@ -5,7 +5,9 @@ import soundRecordingInputReportFile from '../files/sound_recordings_input_repor
 import {
     Spinner,
     Col,
-    Row
+    Row,
+    Toast,
+    Alert
 } from 'react-bootstrap';
 import AddSong from './AddSong';
 import MatchTable from './MatchTable';
@@ -52,6 +54,10 @@ function SearchDB() {
     const [manualInput, setManualInput] = useState('');
     const [selectedSong, setSelectedSong] = useState(emptySong);
 
+    /* Toast */
+    const [open, setOpen] = useState(false);
+    const [toastSong, setToastSong] = useState(emptySong);
+
 
     useEffect(() => {
         d3.csv(soundRecordingFile, function (response) {
@@ -91,9 +97,11 @@ function SearchDB() {
     }
 
     const submitSong = (song) => {
+        setOpen(true);
         setSoundDatabase([...soundDatabase, song]);
         setFilterSong(emptySong)
         setManualInput('');
+        setToastSong(song);
     }
 
 
@@ -125,14 +133,18 @@ function SearchDB() {
     const onSelectedRow = (song) => {
         setManualInput('');
         setFilterSong(emptySong);
-
         setSelectedSong(song);
     }
 
     console.log("soundDatabase in searchDB ", soundDatabase);
     return (
         <>
-            <div className="body-container">
+            <div aria-live="polite"
+                aria-atomic="true"
+                style={{
+                    position: 'relative',
+                    minHeight: '100px',
+                }} className="body-container">
                 {soundDatabase === undefined || soundDatabase.length === 0 ?
                     <Spinner animation="border" role="status">
                         <span className="sr-only">Loading...</span>
@@ -156,6 +168,12 @@ function SearchDB() {
                                 <MatchTable soundRecordingMatched={soundRecordingMatched} deleteMatch={deleteMatch} />
                             </Col>
                         </Row>
+                        <Toast className="toast-success" onClose={() => setOpen(false)} show={open} delay={3000} autohide>
+                            <div className="toast-success-body">
+                                <span className="bolder">BOOM SHAKALAKA!</span><br/>
+                                The song {toastSong.title} by {toastSong.artist} was successfully added!
+                            </div>
+                        </Toast>
                     </>
                 }
             </div>

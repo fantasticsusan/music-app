@@ -151,13 +151,34 @@ hr {
     border-radius: 19px 19px 0 0;
   }
 
-  .modal-title{
+  .modal-title {
     text-transform: uppercase;
     font-family: 'Dosis', sans-serif;
     font-size: 30px;
     margin: 10px;
   }
 
-  .modal-content{
+  .modal-content {
       border-radius: 20px !important;
+  }
+
+  .toast-success {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 20px;
+  }
+
+  .toast-success-body {
+    color: #155724;
+    background-color: #d4edda;
+    padding: 10px;   
+  }
+
+  .bolder {
+      font-weight: 400;
+  }
+
+  .required-field {
+      color: #7f0000;
   }

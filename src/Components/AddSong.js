@@ -5,7 +5,8 @@ import {
     Collapse,
     Alert,
     Row,
-    Modal
+    Modal,
+    Toast
 } from 'react-bootstrap';
 
 function AddSong(params) {
@@ -16,9 +17,7 @@ function AddSong(params) {
     const paramSong = params.paramSong;
     const msg = params.msg || "Add song";
     const [song, setSong] = useState(paramSong);
-    const [successfulMsg, setSuccessfulMsg] = useState(false);
 
-    const [open, setOpen] = useState(false);
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -28,8 +27,6 @@ function AddSong(params) {
     const submitSong = (e) => {
         e.preventDefault();
         submitSongDB(song);
-        setOpen(false);
-        setSuccessfulMsg(true);
         setSong(emptySong);
         handleClose();
     }
@@ -49,16 +46,6 @@ function AddSong(params) {
                     <div className="d-flex justify-content-end">
                         <button className="button" onClick={handleShow} ><i className="fas fa-plus-circle"></i> {msg}</button>
                     </div>
-                    {
-                        successfulMsg === true ?
-                            <div class="custom-alert">
-                                <Alert variant="success" onClose={() => setSuccessfulMsg(false)} dismissible>
-                                    <Alert.Heading>BOOM SHAKALAKA!</Alert.Heading>
-                                    <p>Your song was successfully added!</p>
-                                </Alert>
-                            </div>
-                            : ''
-                    }
                 </Col>
             </Row>
             <Modal show={show} onHide={handleClose}>
@@ -72,11 +59,11 @@ function AddSong(params) {
                     <Form className="form-container" onSubmit={submitSong}>
                         <Form.Row>
                             <Form.Group as={Col} onChange={handleChange} controlId="formGridTitle">
-                                <Form.Label>Title</Form.Label>
+                                <Form.Label>Title <span className="required-field">*</span></Form.Label>
                                 <Form.Control required value={song.title} name="title" placeholder="Fantastic Baby" />
                             </Form.Group>
                             <Form.Group as={Col} onChange={handleChange} controlId="formGridArtist">
-                                <Form.Label>Artist</Form.Label>
+                                <Form.Label>Artist <span className="required-field">*</span></Form.Label>
                                 <Form.Control required value={song.artist} name="artist" placeholder="BIGBANG" />
                             </Form.Group>
                         </Form.Row>
@@ -88,7 +75,7 @@ function AddSong(params) {
 
                             <Form.Group as={Col} onChange={handleChange} controlId="formGridDuration">
                                 <Form.Label>Duration</Form.Label>
-                                <Form.Control type="number" value={song.duration} name="duration" placeholder="323" />
+                                <Form.Control min="0" type="number" value={song.duration} name="duration" placeholder="323" />
                             </Form.Group>
                         </Form.Row>
                         <div className="center">
