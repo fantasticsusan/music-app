@@ -33,7 +33,6 @@ function InputTable(params) {
             <Row>
                 <Col>
                     <div className="items-result">
-                        {/* <p><strong>{soundRecordingInputReport.length}</strong> songs left to be matched</p>                     */}
                         <p><Badge variant="light">{soundRecordingInputReport.length}</Badge> songs left to be matched</p>                    
                         </div>
                 </Col>
@@ -41,7 +40,7 @@ function InputTable(params) {
             <Row>
                 <Col xs={12}>
                     <div className="table-scrollable">
-                        <Table striped>
+                        <Table responsive striped>
                             <thead>
                                 <tr>
                                     <th className="thead-custom">Title</th>

@@ -32,7 +32,6 @@ function ResultTable(params) {
     }
     return (
         <div>
-
             <Row>
                 <Col>
                     <div className="table-header">
@@ -76,7 +75,7 @@ function ResultTable(params) {
                         <>
                             <div className="table-scrollable">
 
-                                <Table striped>
+                                <Table responsive striped>
                                     <thead>
                                         <tr>
                                             <th className="thead-custom">Title</th>

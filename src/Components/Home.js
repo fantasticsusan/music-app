@@ -13,7 +13,7 @@ import MatchTable from './MatchTable';
 import InputTable from './InputTable';
 import ResultTable from './ResultTable';
 
-function SearchDB() {
+function Home() {
 
     const emptySong = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
 
@@ -148,10 +148,10 @@ function SearchDB() {
                         <AddSong msg="Add new song to database" submitSong={submitSong} paramSong={{ 'title': '', 'artist': '', 'isrc': '', 'duration': '' }} />
                     </Row>
                     <Row>
-                        <Col xs={6}>
+                        <Col xs={12} lg={6}>
                             <InputTable selectedSong={selectedSong} onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
                         </Col>
-                        <Col xs={6}>
+                        <Col xs={12} lg={6}>
                             <ResultTable soundDatabase={soundDatabase} selectedSong={selectedSong} submitSong={submitSong} filteredResults={filteredResults} match={match} onTyping={onTyping} manualInput={manualInput} />
                         </Col>
 
@@ -172,4 +172,4 @@ function SearchDB() {
         </div>
     );
 }
-export default SearchDB;
+export default Home;

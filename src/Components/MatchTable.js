@@ -19,7 +19,7 @@ function MatchTable(param) {
                     <p><Badge variant="light">{soundRecordingMatched.length}</Badge> total matches</p>
                 </div>
             </div>
-            <Table className="match-table" striped bordered hover>
+            <Table responsive className="match-table" striped bordered hover>
                 <thead>
                     <tr>
                         <th>Title</th>
