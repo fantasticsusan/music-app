@@ -56,9 +56,6 @@
 }
 
 .form-container {
-    border-radius: 17px;
-    margin: 20px;
-    border: 1px solid lightgrey;
     padding: 20px;
     border-radius: 10px;
 }
@@ -143,3 +140,24 @@ hr {
 .search-input {
     padding: 0 20px 0 20px;
 }
+
+.modal-title-header {
+    background-color: #b71c1c;
+    color: white;
+    padding: 30px;
+    font-size: 20px;
+    width:100%;
+    text-align: center;
+    border-radius: 19px 19px 0 0;
+  }
+
+  .modal-title{
+    text-transform: uppercase;
+    font-family: 'Dosis', sans-serif;
+    font-size: 30px;
+    margin: 10px;
+  }
+
+  .modal-content{
+      border-radius: 20px !important;
+  }
