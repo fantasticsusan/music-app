@@ -38,6 +38,8 @@
     padding: 30px;
     background: white;
     height: 100%;
+    position: relative;
+    min-height: 100px;
 }
 
 .button {

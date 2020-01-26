@@ -6,13 +6,13 @@ import {
     Spinner,
     Col,
     Row,
-    Toast,
-    Alert
+    Toast
 } from 'react-bootstrap';
 import AddSong from './AddSong';
 import MatchTable from './MatchTable';
 import InputTable from './InputTable';
 import ResultTable from './ResultTable';
+
 function SearchDB() {
 
     const emptySong = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
@@ -136,48 +136,40 @@ function SearchDB() {
         setSelectedSong(song);
     }
 
-    console.log("soundDatabase in searchDB ", soundDatabase);
     return (
-        <>
-            <div aria-live="polite"
-                aria-atomic="true"
-                style={{
-                    position: 'relative',
-                    minHeight: '100px',
-                }} className="body-container">
-                {soundDatabase === undefined || soundDatabase.length === 0 ?
-                    <Spinner animation="border" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </Spinner>
-                    :
-                    <>
-                        <Row>
-                            <AddSong msg="Add new song to database" submitSong={submitSong} paramSong={{ 'title': '', 'artist': '', 'isrc': '', 'duration': '' }} />
-                        </Row>
-                        <Row>
-                            <Col xs={6}>
-                                <InputTable selectedSong={selectedSong} onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
-                            </Col>
-                            <Col xs={6}>
-                                <ResultTable soundDatabase={soundDatabase} selectedSong={selectedSong} submitSong={submitSong} filteredResults={filteredResults} match={match} onTyping={onTyping} manualInput={manualInput} />
-                            </Col>
+        <div aria-live="polite" aria-atomic="true" className="body-container">
+            {soundDatabase === undefined || soundDatabase.length === 0 ?
+                <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
+                :
+                <>
+                    <Row>
+                        <AddSong msg="Add new song to database" submitSong={submitSong} paramSong={{ 'title': '', 'artist': '', 'isrc': '', 'duration': '' }} />
+                    </Row>
+                    <Row>
+                        <Col xs={6}>
+                            <InputTable selectedSong={selectedSong} onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
+                        </Col>
+                        <Col xs={6}>
+                            <ResultTable soundDatabase={soundDatabase} selectedSong={selectedSong} submitSong={submitSong} filteredResults={filteredResults} match={match} onTyping={onTyping} manualInput={manualInput} />
+                        </Col>
 
-                        </Row>
-                        <Row>
-                            <Col xs={12}>
-                                <MatchTable soundRecordingMatched={soundRecordingMatched} deleteMatch={deleteMatch} />
-                            </Col>
-                        </Row>
-                        <Toast className="toast-success" onClose={() => setOpen(false)} show={open} delay={3000} autohide>
-                            <div className="toast-success-body">
-                                <span className="bolder">BOOM SHAKALAKA!</span><br/>
-                                The song {toastSong.title} by {toastSong.artist} was successfully added!
+                    </Row>
+                    <Row>
+                        <Col xs={12}>
+                            <MatchTable soundRecordingMatched={soundRecordingMatched} deleteMatch={deleteMatch} />
+                        </Col>
+                    </Row>
+                    <Toast className="toast-success" onClose={() => setOpen(false)} show={open} delay={3000} autohide>
+                        <div className="toast-success-body">
+                            <span className="bolder">BOOM SHAKALAKA!</span><br />
+                            The song {toastSong.title} by {toastSong.artist} was successfully added!
                             </div>
-                        </Toast>
-                    </>
-                }
-            </div>
-        </>
+                    </Toast>
+                </>
+            }
+        </div>
     );
 }
 export default SearchDB;
