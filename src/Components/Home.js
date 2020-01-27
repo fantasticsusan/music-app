@@ -104,9 +104,9 @@ function Home() {
         setToastSong(song);
     }
 
-    const match = () => {
-        const index = soundRecordingInput.indexOf(selectedSong);
-        setSoundRecordingMatched([...soundRecordingMatched, selectedSong]);
+    const match = (registry) => {
+        const index = soundRecordingInput.indexOf(registry.song);
+        setSoundRecordingMatched([...soundRecordingMatched, registry]);
 
         soundRecordingInput.splice(index, 1);
         setSoundRecordingInput([...soundRecordingInput]);

@@ -24,8 +24,9 @@ function ResultTable(params) {
     const matchSong = (song) => {
 
         if (selectedSong.title !== emptyTitleSong) {
+            const registry = { 'song': selectedSong, 'matchedSong': song };
+            match(registry);
             selectedSong = {};
-            match(song);
         }
     }
     return (
