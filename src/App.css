@@ -64,10 +64,8 @@
 }
 
 .disabled {
-    color: grey;
-    border: 1px solid grey;
-    cursor: default;
-    pointer-events: none;
+    cursor: not-allowed;
+    /* pointer-events: none; */
 }
 
 .button-copy-data:hover {

@@ -82,7 +82,7 @@ function AddSong(params) {
                             <button className="button" type="submit">Add</button>
                         </div>
                         <div className="copy-song-container">
-                            <button type="button" onClick={() => copySelectedSongData()} disabled={selectedSong.title === emptySong.title} className={selectedSong.title === emptySong.title ? "button-copy-data disabled" : "button-copy-data"} >Copy selected data song</button>
+                            <button type="button" onClick={() => copySelectedSongData()} disabled={selectedSong.title === emptySong.title} className={selectedSong.title === emptySong.title ? "button-copy-data disabled" : "button-copy-data"} >Copy data from selected song</button>
                         </div>
                     </Form>
                 </div>
