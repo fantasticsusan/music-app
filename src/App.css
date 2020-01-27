@@ -48,9 +48,24 @@
     padding: 10px 20px;
     color: white;
     display: inline-block;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    border: none;
     margin: 10px;
+    border:none;
+}
+
+.button-copy-data {
+    background-color: white;
+    color: #b71c1c;
+    border-radius: 10px;
+    padding: 5px 10px;
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid #b71c1c;
+    font-size: 12px;
+}
+
+.button-copy-data:hover{
+    font-weight: bolder;
+    border: 2px solid #b71c1c;
 }
 
 .button:hover {
@@ -70,7 +85,6 @@
     padding: 20px;
     margin: 20px;
 }
-
 
 .custom-row:hover {
     cursor: pointer;
@@ -95,6 +109,7 @@ hr {
 .table-header-body {
     padding: 10px;
 }
+
 .table-scrollable thead th {
     position: sticky;
     top: 0;
@@ -118,7 +133,7 @@ hr {
 }
 
 .match-table {
-    width:100%;
+    width: 100%;
 }
 
 .table-header {
@@ -127,11 +142,11 @@ hr {
 }
 
 .table-header-input {
-    margin-bottom:65px;
+    margin-bottom: 65px;
 }
 
 .items-result {
-    color:grey;
+    color: grey;
     text-align: right;
 }
 
@@ -148,44 +163,48 @@ hr {
     color: white;
     padding: 30px;
     font-size: 20px;
-    width:100%;
+    width: 100%;
     text-align: center;
     border-radius: 19px 19px 0 0;
-  }
+}
 
-  .modal-title {
+.modal-title {
     text-transform: uppercase;
     font-family: 'Dosis', sans-serif;
     font-size: 30px;
     margin: 10px;
-  }
+}
 
-  .modal-content {
-      border-radius: 20px !important;
-  }
+.modal-content {
+    border-radius: 20px !important;
+}
 
-  .toast-success {
+.toast-success {
     position: absolute;
     top: 0;
     left: 0;
     margin: 20px;
-  }
+}
 
-  .toast-success-body {
+.toast-success-body {
     color: #155724;
     background-color: #d4edda;
-    padding: 10px;   
-  }
+    padding: 10px;
+}
 
-  .bolder {
-      font-weight: 400;
-  }
+.bolder {
+    font-weight: 400;
+}
 
-  .required-field {
-      color: #7f0000;
-  }
+.required-field {
+    color: #7f0000;
+}
 
-  .table-match-container{
-      padding:10px;
-      margin-top:10px;
-  }
+.table-match-container {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.copy-song-container {
+    align-content: left;
+}
