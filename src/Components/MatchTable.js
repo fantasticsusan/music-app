@@ -35,7 +35,6 @@ function MatchTable(param) {
     }
 
     const undoMatch = (registry) => {
-        console.log("The song is ", registry);
         deleteMatch(registry);
     }
 
