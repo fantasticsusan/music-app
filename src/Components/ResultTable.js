@@ -71,7 +71,7 @@ function ResultTable(params) {
                             :
 
                             <div className="table-scrollable">
-                                <Table responsive striped>
+                                <Table striped>
                                     <thead>
                                         <tr>
                                             <th className="thead-custom">Title</th>

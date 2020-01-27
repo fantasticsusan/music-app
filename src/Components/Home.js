@@ -116,13 +116,14 @@ function Home() {
         setManualInput('');
     }
 
-    const deleteMatch = (song) => {
-        const index = soundRecordingMatched.indexOf(song);
+    const deleteMatch = (registry) => {
+        console.log("Sound recording matched ", registry)
+        const index = soundRecordingMatched.indexOf(registry);
 
         soundRecordingMatched.splice(index, 1);
         setSoundRecordingMatched([...soundRecordingMatched]);
 
-        setSoundRecordingInput([...soundRecordingInput, song]);
+        setSoundRecordingInput([...soundRecordingInput, registry.song]);
         setSelectedSong(emptySong);
         setFilterSong(emptySong);
         setManualInput('');
@@ -161,8 +162,7 @@ function Home() {
                     </Row>
                     <Toast className="toast-success" onClose={() => setOpen(false)} show={open} delay={3000} autohide>
                         <div className="toast-success-body">
-                            <span className="bolder">BOOM SHAKALAKA!</span><br />
-                            The song {toastSong.title} by {toastSong.artist} was successfully added!
+                            <span className="bolder">BOOM SHAKALAKA!</span> The song {toastSong.title} by {toastSong.artist} was successfully added!
                             </div>
                     </Toast>
                 </>

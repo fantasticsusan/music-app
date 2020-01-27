@@ -40,7 +40,7 @@ function InputTable(params) {
             <Row>
                 <Col xs={12}>
                     <div className="table-scrollable">
-                        <Table responsive striped>
+                        <Table striped>
                             <thead>
                                 <tr>
                                     <th className="thead-custom">Title</th>

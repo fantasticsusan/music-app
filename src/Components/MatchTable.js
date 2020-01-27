@@ -4,7 +4,6 @@ import {
     Button,
     Badge,
     OverlayTrigger,
-    Tooltip,
     Popover
 } from 'react-bootstrap';
 
@@ -18,22 +17,26 @@ function MatchTable(param) {
 
     const popover = (matchedSong) => {
         return (<Popover id="popover-basic">
-            <Popover.Title as="h3">Matched song</Popover.Title>
+            <Popover.Title as="h3">{matchedSong.title}</Popover.Title>
             <Popover.Content>
-                <ul>
-                    <li><strong>Title: </strong> {matchedSong.title}</li>
-                    <li><strong>Artist: </strong> {matchedSong.artist}</li>
-                    {matchedSong.isrc !== emptyField ?
-                        <li><strong>ISRC: </strong> {matchedSong.isrc}</li>
-                        :
-                        ''}
-                    {matchedSong.duration !== emptyField ?
-                        <li><strong>Duration: </strong> {matchedSong.duration}</li>
-                        :
-                        ''}
-                </ul>
+                <p><strong>Artist: </strong> {matchedSong.artist}</p>
+                {matchedSong.isrc !== emptyField ?
+                    <p><strong>ISRC: </strong> {matchedSong.isrc}</p>
+                    :
+                    ''
+                }
+                {matchedSong.duration !== emptyField ?
+                    <p><strong>Duration: </strong> {matchedSong.duration}</p>
+                    :
+                    ''
+                }
             </Popover.Content>
         </Popover>);
+    }
+
+    const undoMatch = (registry) => {
+        console.log("The song is ", registry);
+        deleteMatch(registry);
     }
 
 
@@ -46,15 +49,15 @@ function MatchTable(param) {
                 </div>
             </div>
             {soundRecordingMatched.length !== 0 ?
-                <Table responsive className="match-table" striped bordered hover>
+                <Table className="match-table" striped bordered hover>
                     <thead>
                         <tr>
                             <th>Title</th>
                             <th>Artist</th>
                             <th>ISRC</th>
-                            <th>Duration</th>
-                            <th>Matched song</th>
-                            <th>Unmatch</th>
+                            <th className="text-center">Duration</th>
+                            <th className="text-center">Matched song</th>
+                            <th className="text-center">Unmatch</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,13 +69,13 @@ function MatchTable(param) {
                                     <td>{song.title}</td>
                                     <td>{song.artist}</td>
                                     <td>{song.isrc}</td>
-                                    <td>{song.duration}</td>
-                                    <td>
-                                        <OverlayTrigger trigger="click" placement="right" overlay={popover(matchedSong)}>
-                                            <Button variant="secondary"><i className="fas fa-info-circle"></i></Button>
+                                    <td className="text-center">{song.duration}</td>
+                                    <td className="text-center">
+                                        <OverlayTrigger trigger="hover" placement="left" overlay={popover(matchedSong)}>
+                                            <Button variant="info"><i className="fas fa-info-circle"></i></Button>
                                         </OverlayTrigger>
                                     </td>
-                                    <td><Button variant="danger" onClick={() => deleteMatch(song, index)}><i className="fas fa-undo-alt"></i></Button></td>
+                                    <td className="text-center"><Button variant="danger" onClick={() => undoMatch(registry, index)}><i className="fas fa-undo-alt"></i></Button></td>
                                 </tr>)
                         })}
                     </tbody>
