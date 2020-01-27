@@ -17,12 +17,12 @@ function ToastSuccess(params) {
             <div className="toast-success-body">
                 {msg === "databaseSuccess" ?
                     <>
-                        <span className="bolder">BOOM SHAKALAKA!</span>{' '}
+                        <span className="bolder">BOOM SHAKALAKA!</span><br/>
                         The song {song.title} by {song.artist} was successfully added!
                     </>
                     :
                     <>
-                        <span className="bolder">BOOM SHAKALAKA!</span>{' '}
+                        <span className="bolder">BOOM SHAKALAKA!</span><br/>
                         The song {song.title} by {song.artist} was successfully matched!
                     </>
                 }
