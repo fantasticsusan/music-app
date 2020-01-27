@@ -27,6 +27,7 @@ function Home() {
         }
         return 0;
     })
+
     const [soundRecordingInput, setSoundRecordingInput] = useState([]);
     soundRecordingInput.sort(function (a, b) {
         if (a.artist < b.artist) { return -1; }
@@ -37,6 +38,7 @@ function Home() {
         }
         return 0;
     })
+
     const [soundRecordingMatched, setSoundRecordingMatched] = useState([]);
     soundRecordingMatched.sort(function (a, b) {
         if (a.artist < b.artist) { return -1; }
@@ -47,6 +49,7 @@ function Home() {
         }
         return 0;
     })
+
     const [filteredResults, setFilteredResults] = useState([]);
     const [filterSong, setFilterSong] = useState(emptySong);
 
@@ -57,7 +60,6 @@ function Home() {
     /* Toast */
     const [open, setOpen] = useState(false);
     const [toastSong, setToastSong] = useState(emptySong);
-
 
     useEffect(() => {
         d3.csv(soundRecordingFile, function (response) {
@@ -87,8 +89,6 @@ function Home() {
 
     }, [selectedSong, soundDatabase]);
 
-
-
     const onTyping = (e) => {
         const value = e.target.value;
         let songObject = { 'title': value, 'artist': value, 'isrc': value, 'duration': value };
@@ -104,7 +104,6 @@ function Home() {
         setToastSong(song);
     }
 
-
     const match = () => {
         const index = soundRecordingInput.indexOf(selectedSong);
         setSoundRecordingMatched([...soundRecordingMatched, selectedSong]);
@@ -115,7 +114,6 @@ function Home() {
         setSelectedSong(emptySong);
         setFilterSong(emptySong);
         setManualInput('');
-
     }
 
     const deleteMatch = (song) => {
@@ -152,7 +150,7 @@ function Home() {
                             <InputTable selectedSong={selectedSong} onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
                         </Col>
                         <Col xs={12} lg={6}>
-                            <ResultTable soundDatabase={soundDatabase} selectedSong={selectedSong} submitSong={submitSong} filteredResults={filteredResults} match={match} onTyping={onTyping} manualInput={manualInput} />
+                            <ResultTable soundDatabase={soundDatabase} selectedSong={selectedSong} filteredResults={filteredResults} match={match} onTyping={onTyping} manualInput={manualInput} />
                         </Col>
 
                     </Row>

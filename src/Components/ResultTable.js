@@ -8,7 +8,6 @@ import {
     InputGroup,
     Badge
 } from 'react-bootstrap';
-import AddSong from './AddSong';
 
 function ResultTable(params) {
 
@@ -20,7 +19,6 @@ function ResultTable(params) {
     const match = params.match;
     const onTyping = params.onTyping;
     const manualInput = params.manualInput;
-    const submitSong = params.submitSong;
     let selectedSong = params.selectedSong;
 
     const matchSong = (song) => {
