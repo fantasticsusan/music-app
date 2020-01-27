@@ -49,7 +49,7 @@ function MatchTable(param) {
                 </div>
             </div>
             {soundRecordingMatched.length !== 0 ?
-                <Table className="match-table" striped bordered hover>
+                <Table className="match-table" striped bordered hover responsive>
                     <thead>
                         <tr>
                             <th>Title</th>
