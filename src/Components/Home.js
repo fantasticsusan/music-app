@@ -5,13 +5,13 @@ import soundRecordingInputReportFile from '../files/sound_recordings_input_repor
 import {
     Spinner,
     Col,
-    Row,
-    Toast
+    Row
 } from 'react-bootstrap';
 import AddSong from './AddSong';
 import MatchTable from './MatchTable';
 import InputTable from './InputTable';
 import ResultTable from './ResultTable';
+import Toast from './Toast';
 
 function Home() {
 
@@ -59,7 +59,7 @@ function Home() {
 
     /* Toast */
     const [open, setOpen] = useState(false);
-    const [toastSong, setToastSong] = useState(emptySong);
+    const [toast, setToast] = useState({'song':emptySong, 'msg':''});
 
     useEffect(() => {
         d3.csv(soundRecordingFile, function (response) {
@@ -101,7 +101,7 @@ function Home() {
         setSoundDatabase([...soundDatabase, song]);
         setFilterSong(emptySong)
         setManualInput('');
-        setToastSong(song);
+        setToast({'song':song, 'msg':'databaseSuccess'});
     }
 
     const match = (registry) => {
@@ -114,10 +114,12 @@ function Home() {
         setSelectedSong(emptySong);
         setFilterSong(emptySong);
         setManualInput('');
+        setToast({'song':registry.song, 'msg':'matchSuccess'});
+        setOpen(true);
+
     }
 
     const deleteMatch = (registry) => {
-        console.log("Sound recording matched ", registry)
         const index = soundRecordingMatched.indexOf(registry);
 
         soundRecordingMatched.splice(index, 1);
@@ -160,11 +162,7 @@ function Home() {
                             <MatchTable soundRecordingMatched={soundRecordingMatched} deleteMatch={deleteMatch} />
                         </Col>
                     </Row>
-                    <Toast className="toast-success" onClose={() => setOpen(false)} show={open} delay={3000} autohide>
-                        <div className="toast-success-body">
-                            <span className="bolder">BOOM SHAKALAKA!</span> The song {toastSong.title} by {toastSong.artist} was successfully added!
-                            </div>
-                    </Toast>
+                    <Toast setOpen={setOpen} open={open} song={toast.song} msg={toast.msg}/>
                 </>
             }
         </div>
