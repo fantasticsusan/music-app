@@ -4,7 +4,7 @@ This project is deployed in this [url](https://music-app-react.netlify.com/)
 
 ### `npm i`
 
-Installs all the required
+Installs all the required dependencies to run the project.
 
 ### `npm run start`
 
