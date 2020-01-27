@@ -12,12 +12,14 @@ function AddSong(params) {
 
     const submitSongDB = params.submitSong;
     const selectedSong = params.selectedSong || emptySong;
-    const msg = params.msg || "Add song";
 
     const [song, setSong] = useState(emptySong);
 
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setSong(emptySong);
+        setShow(false);
+    }
     const handleShow = () => setShow(true);
 
     const copySelectedSongData = () => {
@@ -27,7 +29,6 @@ function AddSong(params) {
     const submitSong = (e) => {
         e.preventDefault();
         submitSongDB(song);
-        setSong(emptySong);
         handleClose();
     }
 
@@ -44,19 +45,23 @@ function AddSong(params) {
             <Row>
                 <Col>
                     <div className="d-flex justify-content-end">
-                        <button className="button" onClick={handleShow} ><i className="fas fa-plus-circle"></i> {msg}</button>
+                        <button className="button" onClick={handleShow} ><i className="fas fa-plus-circle"></i> Add song to database</button>
                     </div>
                 </Col>
             </Row>
             <Modal show={show} onHide={handleClose}>
                 <div className="modal-container">
                     <div className="modal-title-header">
-                        <h2 className="modal-title text-center">Add song
+                        <h2 className="modal-title text-center">New song
                     <button type="button" className="close" onClick={handleClose}>&times;</button>
                         </h2>
                     </div>
 
+
                     <Form className="form-container" onSubmit={submitSong}>
+                        <div className="copy-song-container">
+                            <button type="button" onClick={() => copySelectedSongData()} disabled={selectedSong.title === emptySong.title} className={selectedSong.title === emptySong.title ? "button-copy-data disabled" : "button-copy-data"} >Copy data from selected song</button>
+                        </div>
                         <Form.Row>
                             <Form.Group as={Col} onChange={handleChange} controlId="formGridTitle">
                                 <Form.Label>Title <span className="required-field">*</span></Form.Label>
@@ -79,10 +84,7 @@ function AddSong(params) {
                             </Form.Group>
                         </Form.Row>
                         <div className="center">
-                            <button className="button" type="submit">Add</button>
-                        </div>
-                        <div className="copy-song-container">
-                            <button type="button" onClick={() => copySelectedSongData()} disabled={selectedSong.title === emptySong.title} className={selectedSong.title === emptySong.title ? "button-copy-data disabled" : "button-copy-data"} >Copy data from selected song</button>
+                            <button className="button" type="submit">Add song to database</button>
                         </div>
                     </Form>
                 </div>

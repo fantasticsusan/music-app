@@ -44,7 +44,7 @@ function ResultTable(params) {
                             <InputGroup.Prepend>
                                 <InputGroup.Text id="basic-addon1"><i className="fas fa-search"></i></InputGroup.Text>
                             </InputGroup.Prepend>
-                            <Form.Control value={manualInput} placeholder="Search by title, artist, ISRC or duration" onChange={onTyping} />
+                            <Form.Control type="search" value={manualInput} placeholder="Search by title, artist, ISRC or duration" onChange={onTyping} />
                         </InputGroup>
                     </div>
                 </Col>
@@ -63,9 +63,7 @@ function ResultTable(params) {
 
                             <div className="alert-custom">
                                 <Alert variant="danger">
-                                    Sorry, we couldn't find any song that matches.
-                                    <br />
-                                    You can add this song to the database.
+                                    Sorry, we couldn't find any song that matches, but you can add a new one to the database.
                                     </Alert>
                             </div>
 

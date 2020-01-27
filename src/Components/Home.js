@@ -143,7 +143,7 @@ function Home() {
                 :
                 <>
                     <Row>
-                        <AddSong msg="Add song to database" submitSong={submitSong} selectedSong={selectedSong} />
+                        <AddSong submitSong={submitSong} selectedSong={selectedSong} />
                     </Row>
                     <Row>
                         <Col xs={12} lg={6}>
