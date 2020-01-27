@@ -62,15 +62,15 @@ function ResultTable(params) {
                 <Col xs={12}>
                     {
                         filteredResults.length === 0 ?
-                            <>
-                                <div className="alert-custom">
-                                    <Alert variant="danger">Sorry, we couldn't find any song that matches.</Alert>
-                                </div>
-                                {selectedSong.title !== "" ?
-                                    <AddSong msg="Add selected song to database" submitSong={submitSong} paramSong={selectedSong} />
-                                    : ''
-                                }
-                            </>
+
+                            <div className="alert-custom">
+                                <Alert variant="danger">
+                                    Sorry, we couldn't find any song that matches.
+                                    <br />
+                                    You can add this song to the database.
+                                    </Alert>
+                            </div>
+
                             :
 
                             <div className="table-scrollable">

@@ -11,19 +11,14 @@ function AddSong(params) {
     const emptySong = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
 
     const submitSongDB = params.submitSong;
-    const paramSong = params.paramSong || emptySong;
     const selectedSong = params.selectedSong || emptySong;
     const msg = params.msg || "Add song";
 
-    const [song, setSong] = useState(paramSong);
+    const [song, setSong] = useState(emptySong);
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    // useEffect(() => {
-    //     setSong(paramSong);
-    // }, [paramSong]);
 
     const copySelectedSongData = () => {
         setSong(selectedSong);
@@ -87,7 +82,7 @@ function AddSong(params) {
                             <button className="button" type="submit">Add</button>
                         </div>
                         <div className="copy-song-container">
-                            <button type="button" onClick={() => copySelectedSongData()} className="button-copy-data" >Copy selected data song</button>
+                            <button type="button" onClick={() => copySelectedSongData()} disabled={selectedSong.title === emptySong.title} className={selectedSong.title === emptySong.title ? "button-copy-data disabled":"button-copy-data"} >Copy selected data song</button>
                         </div>
                     </Form>
                 </div>
