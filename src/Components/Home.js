@@ -81,7 +81,7 @@ function Home() {
 
     useEffect(() => {
         const results = soundDatabase.filter(function (song) {
-            return (song.title.toUpperCase().includes(selectedSong.title.toUpperCase()) || selectedSong.title.toUpperCase().includes(song.title.toUpperCase())) && (song.artist.toUpperCase().includes(selectedSong.artist.toUpperCase()) || selectedSong.artist.toUpperCase().includes(song.artist.toUpperCase()));
+            return (song.title.toUpperCase().includes(selectedSong.title.toUpperCase()) || selectedSong.title.toUpperCase().includes(song.title.toUpperCase())) && (song.artist.toUpperCase().includes(selectedSong.artist.toUpperCase()) || selectedSong.artist.toUpperCase().includes(song.artist.toUpperCase())) && (song.isrc.toUpperCase().includes(selectedSong.isrc.toUpperCase()) || selectedSong.isrc.toUpperCase().includes(song.isrc.toUpperCase()));
         });
         setFilteredResults(results);
 
@@ -145,7 +145,7 @@ function Home() {
                 :
                 <>
                     <Row>
-                        <AddSong msg="Add new song to database" submitSong={submitSong} paramSong={{ 'title': '', 'artist': '', 'isrc': '', 'duration': '' }} />
+                        <AddSong msg="Add song to database" submitSong={submitSong} paramSong={emptySong} />
                     </Row>
                     <Row>
                         <Col xs={12} lg={6}>

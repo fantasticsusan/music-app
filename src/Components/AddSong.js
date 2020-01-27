@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Form,
     Col,
@@ -13,12 +13,16 @@ function AddSong(params) {
     const submitSongDB = params.submitSong;
     const paramSong = params.paramSong;
     const msg = params.msg || "Add song";
+
     const [song, setSong] = useState(paramSong);
-
+    
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        setSong(paramSong);
+    }, [paramSong]);
 
 
     const submitSong = (e) => {
@@ -48,7 +52,7 @@ function AddSong(params) {
             <Modal show={show} onHide={handleClose}>
                 <div className="modal-container">
                     <div className="modal-title-header">
-                        <h2 class="modal-title text-center">Add song
+                        <h2 className="modal-title text-center">Add song
                     <button type="button" className="close" onClick={handleClose}>&times;</button>
                         </h2>
                     </div>
