@@ -13,20 +13,20 @@ function MatchTable(param) {
     const soundRecordingMatched = param.soundRecordingMatched;
     const deleteMatch = param.deleteMatch;
 
-    const emptyField = "";
+    const EMTPY_FIELD = "";
 
-    const popover = (matchedSong) => {
+    const popover = (matchedRecord) => {
         return (<Popover id="popover-basic">
-            <Popover.Title as="h3">{matchedSong.title}</Popover.Title>
+            <Popover.Title as="h3">{matchedRecord.title}</Popover.Title>
             <Popover.Content>
-                <p><strong>Artist: </strong> {matchedSong.artist}</p>
-                {matchedSong.isrc !== emptyField ?
-                    <p><strong>ISRC: </strong> {matchedSong.isrc}</p>
+                <p><strong>Artist: </strong> {matchedRecord.artist}</p>
+                {matchedRecord.isrc !== EMTPY_FIELD ?
+                    <p><strong>ISRC: </strong> {matchedRecord.isrc}</p>
                     :
                     ''
                 }
-                {matchedSong.duration !== emptyField ?
-                    <p><strong>Duration: </strong> {matchedSong.duration}</p>
+                {matchedRecord.duration !== EMTPY_FIELD ?
+                    <p><strong>Duration: </strong> {matchedRecord.duration}</p>
                     :
                     ''
                 }
@@ -55,22 +55,22 @@ function MatchTable(param) {
                             <th>Artist</th>
                             <th>ISRC</th>
                             <th className="text-center">Duration</th>
-                            <th className="text-center">Matched song</th>
+                            <th className="text-center">Matched recording</th>
                             <th className="text-center">Unmatch</th>
                         </tr>
                     </thead>
                     <tbody>
                         {soundRecordingMatched.map((registry, index) => {
-                            const song = registry.song;
-                            const matchedSong = registry.matchedSong;
+                            const soundRecording = registry.recording;
+                            const matchedRecording = registry.matchedRecording;
                             return (
                                 <tr key={index}>
-                                    <td>{song.title}</td>
-                                    <td>{song.artist}</td>
-                                    <td>{song.isrc}</td>
-                                    <td className="text-center">{song.duration}</td>
+                                    <td>{soundRecording.title}</td>
+                                    <td>{soundRecording.artist}</td>
+                                    <td>{soundRecording.isrc}</td>
+                                    <td className="text-center">{soundRecording.duration}</td>
                                     <td className="text-center">
-                                        <OverlayTrigger trigger="hover" placement="left" overlay={popover(matchedSong)}>
+                                        <OverlayTrigger trigger="hover" placement="left" overlay={popover(matchedRecording)}>
                                             <Button variant="info"><i className="fas fa-info-circle"></i></Button>
                                         </OverlayTrigger>
                                     </td>

@@ -8,16 +8,16 @@ import {
 
 function InputTable(params) {
 
-    const emptySong = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
+    const EMPTY_SOUND_RECORDING = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
 
     const soundRecordingInputReport = params.soundRecordingInputReport || [];
     const onSelectedRow = params.onSelectedRow;
 
-    const selectedSong = params.selectedSong || emptySong;
+    const selectedRecording = params.selectedRecording || EMPTY_SOUND_RECORDING;
 
-    const handleClick = (newSelectedSong) => {
-        let song = newSelectedSong === selectedSong ? emptySong : newSelectedSong;
-        onSelectedRow(song);
+    const handleClick = (newSelectedRecording) => {
+        let recording = newSelectedRecording === selectedRecording ? EMPTY_SOUND_RECORDING : newSelectedRecording;
+        onSelectedRow(recording);
     }
 
 
@@ -33,7 +33,7 @@ function InputTable(params) {
             <Row>
                 <Col>
                     <div className="items-result">
-                        <p><Badge variant="light">{soundRecordingInputReport.length}</Badge> songs left to be matched</p>                    
+                        <p><Badge variant="light">{soundRecordingInputReport.length}</Badge> recordings left to be matched</p>                    
                         </div>
                 </Col>
             </Row>
@@ -50,13 +50,13 @@ function InputTable(params) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {soundRecordingInputReport.map((song, index) => {
+                                {soundRecordingInputReport.map((recording, index) => {
                                     return (
-                                        <tr onClick={() => handleClick(song)} className={song === selectedSong ? "selected-row" : "custom-row"} key={index}>
-                                            <td>{song.title}</td>
-                                            <td>{song.artist}</td>
-                                            <td>{song.isrc}</td>
-                                            <td>{song.duration}</td>
+                                        <tr onClick={() => handleClick(recording)} className={recording === selectedRecording ? "selected-row" : "custom-row"} key={index}>
+                                            <td>{recording.title}</td>
+                                            <td>{recording.artist}</td>
+                                            <td>{recording.isrc}</td>
+                                            <td>{recording.duration}</td>
                                         </tr>)
                                 })}
                             </tbody>

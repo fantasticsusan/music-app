@@ -7,7 +7,7 @@ import {
     Col,
     Row
 } from 'react-bootstrap';
-import AddSong from './AddSong';
+import AddRecording from './AddRecording';
 import MatchTable from './MatchTable';
 import InputTable from './InputTable';
 import ResultTable from './ResultTable';
@@ -15,7 +15,9 @@ import Toast from './Toast';
 
 function Home() {
 
-    const emptySong = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
+    const EMPTY_RECORDING = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
+    const EMPTY_INPUT = '';
+    const EMPTY_FIELD = '';
 
     const [soundDatabase, setSoundDatabase] = useState([]);
     soundDatabase.sort(function (a, b) {
@@ -51,15 +53,15 @@ function Home() {
     })
 
     const [filteredResults, setFilteredResults] = useState([]);
-    const [filterSong, setFilterSong] = useState(emptySong);
+    const [filterRecording, setFilterRecording] = useState(EMPTY_RECORDING);
 
     /* Controled inputs */
-    const [manualInput, setManualInput] = useState('');
-    const [selectedSong, setSelectedSong] = useState(emptySong);
+    const [manualInput, setManualInput] = useState(EMPTY_INPUT);
+    const [selectedRecording, setSelectedRecording] = useState(EMPTY_RECORDING);
 
     /* Toast */
     const [open, setOpen] = useState(false);
-    const [toast, setToast] = useState({'song':emptySong, 'msg':''});
+    const [toast, setToast] = useState({'recording':EMPTY_RECORDING, 'msg':EMPTY_FIELD});
 
     useEffect(() => {
         d3.csv(soundRecordingFile, function (response) {
@@ -74,47 +76,47 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        const results = soundDatabase.filter(function (song) {
-            return song.title.toUpperCase().includes(filterSong.title.toUpperCase()) || song.artist.toUpperCase().includes(filterSong.artist.toUpperCase()) || song.isrc.toUpperCase().includes(filterSong.isrc.toUpperCase()) || song.duration.includes(filterSong.duration);
+        const results = soundDatabase.filter(function (recording) {
+            return recording.title.toUpperCase().includes(filterRecording.title.toUpperCase()) || recording.artist.toUpperCase().includes(filterRecording.artist.toUpperCase()) || recording.isrc.toUpperCase().includes(filterRecording.isrc.toUpperCase()) || recording.duration.includes(filterRecording.duration);
         });
         setFilteredResults(results);
 
-    }, [filterSong, soundDatabase]);
+    }, [filterRecording, soundDatabase]);
 
     useEffect(() => {
-        const results = soundDatabase.filter(function (song) {
-            return (song.isrc !== "" && selectedSong.isrc !== "" && song.isrc.toUpperCase() === selectedSong.isrc.toUpperCase()) || ((song.title.toUpperCase().includes(selectedSong.title.toUpperCase()) || selectedSong.title.toUpperCase().includes(song.title.toUpperCase())) && (song.artist.toUpperCase().includes(selectedSong.artist.toUpperCase()) || selectedSong.artist.toUpperCase().includes(song.artist.toUpperCase())));
+        const results = soundDatabase.filter(function (recording) {
+            return (recording.isrc !== "" && selectedRecording.isrc !== "" && recording.isrc.toUpperCase() === selectedRecording.isrc.toUpperCase()) || ((recording.title.toUpperCase().includes(selectedRecording.title.toUpperCase()) || selectedRecording.title.toUpperCase().includes(recording.title.toUpperCase())) && (recording.artist.toUpperCase().includes(selectedRecording.artist.toUpperCase()) || selectedRecording.artist.toUpperCase().includes(recording.artist.toUpperCase())));
         });
         setFilteredResults(results);
 
-    }, [selectedSong, soundDatabase]);
+    }, [selectedRecording, soundDatabase]);
 
     const onTyping = (e) => {
         const value = e.target.value;
-        let songObject = { 'title': value, 'artist': value, 'isrc': value, 'duration': value };
+        let recordingObject = { 'title': value, 'artist': value, 'isrc': value, 'duration': value };
         setManualInput(value);
-        setFilterSong(songObject);
+        setFilterRecording(recordingObject);
     }
 
-    const submitSong = (song) => {
+    const submitRecording = (recording) => {
         setOpen(true);
-        setSoundDatabase([...soundDatabase, song]);
-        setFilterSong(emptySong)
-        setManualInput('');
-        setToast({'song':song, 'msg':'databaseSuccess'});
+        setSoundDatabase([...soundDatabase, recording]);
+        setFilterRecording(EMPTY_RECORDING)
+        setManualInput(EMPTY_INPUT);
+        setToast({'recording':recording, 'msg':'databaseSuccess'});
     }
 
     const match = (registry) => {
-        const index = soundRecordingInput.indexOf(registry.song);
+        const index = soundRecordingInput.indexOf(registry.recording);
         setSoundRecordingMatched([...soundRecordingMatched, registry]);
 
         soundRecordingInput.splice(index, 1);
         setSoundRecordingInput([...soundRecordingInput]);
 
-        setSelectedSong(emptySong);
-        setFilterSong(emptySong);
-        setManualInput('');
-        setToast({'song':registry.song, 'msg':'matchSuccess'});
+        setSelectedRecording(EMPTY_RECORDING);
+        setFilterRecording(EMPTY_RECORDING);
+        setManualInput(EMPTY_INPUT);
+        setToast({'recording':registry.recording, 'msg':'matchSuccess'});
         setOpen(true);
 
     }
@@ -125,16 +127,16 @@ function Home() {
         soundRecordingMatched.splice(index, 1);
         setSoundRecordingMatched([...soundRecordingMatched]);
 
-        setSoundRecordingInput([...soundRecordingInput, registry.song]);
-        setSelectedSong(emptySong);
-        setFilterSong(emptySong);
-        setManualInput('');
+        setSoundRecordingInput([...soundRecordingInput, registry.recording]);
+        setSelectedRecording(EMPTY_RECORDING);
+        setFilterRecording(EMPTY_RECORDING);
+        setManualInput(EMPTY_INPUT);
     }
 
-    const onSelectedRow = (song) => {
-        setManualInput('');
-        setFilterSong(emptySong);
-        setSelectedSong(song);
+    const onSelectedRow = (recording) => {
+        setManualInput(EMPTY_INPUT);
+        setFilterRecording(EMPTY_RECORDING);
+        setSelectedRecording(recording);
     }
 
     return (
@@ -146,14 +148,14 @@ function Home() {
                 :
                 <>
                     <Row>
-                        <AddSong submitSong={submitSong} selectedSong={selectedSong} />
+                        <AddRecording submitRecording={submitRecording} selectedRecording={selectedRecording} />
                     </Row>
                     <Row>
                         <Col xs={12} lg={6}>
-                            <InputTable selectedSong={selectedSong} onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
+                            <InputTable selectedRecording={selectedRecording} onSelectedRow={onSelectedRow} soundRecordingInputReport={soundRecordingInput} />
                         </Col>
                         <Col xs={12} lg={6}>
-                            <ResultTable soundDatabase={soundDatabase} selectedSong={selectedSong} filteredResults={filteredResults} match={match} onTyping={onTyping} manualInput={manualInput} />
+                            <ResultTable soundDatabase={soundDatabase} selectedRecording={selectedRecording} filteredResults={filteredResults} match={match} onTyping={onTyping} manualInput={manualInput} />
                         </Col>
 
                     </Row>
@@ -162,7 +164,7 @@ function Home() {
                             <MatchTable soundRecordingMatched={soundRecordingMatched} deleteMatch={deleteMatch} />
                         </Col>
                     </Row>
-                    <Toast setOpen={setOpen} open={open} song={toast.song} msg={toast.msg}/>
+                    <Toast setOpen={setOpen} open={open} recording={toast.recording} msg={toast.msg}/>
                 </>
             }
         </div>

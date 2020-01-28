@@ -5,12 +5,12 @@ import {
 
 function ToastSuccess(params) {
 
-    const emptySong = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
+    const EMTPY_RECORDING = { 'title': '', 'artist': '', 'isrc': '', 'duration': '' };
 
     const setOpen = params.setOpen;
     const open = params.open;
     const msg = params.msg;
-    const song = params.song || emptySong;
+    const recording = params.recording || EMTPY_RECORDING;
 
     return (
         <Toast className="toast-success" onClose={() => setOpen(false)} show={open} delay={3000} autohide>
@@ -18,12 +18,12 @@ function ToastSuccess(params) {
                 {msg === "databaseSuccess" ?
                     <>
                         <span className="bolder">BOOM SHAKALAKA!</span><br/>
-                        The song {song.title} by {song.artist} was successfully added!
+                        The recording {recording.title} by {recording.artist} was successfully added!
                     </>
                     :
                     <>
                         <span className="bolder">BOOM SHAKALAKA!</span><br/>
-                        The song {song.title} by {song.artist} was successfully matched!
+                        The recording {recording.title} by {recording.artist} was successfully matched!
                     </>
                 }
             </div>

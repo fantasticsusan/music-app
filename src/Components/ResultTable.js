@@ -11,7 +11,7 @@ import {
 
 function ResultTable(params) {
 
-    const emptyTitleSong = "";
+    const emptyTitleRecording = "";
 
     const soundDatabase = params.soundDatabase || [];
 
@@ -19,14 +19,14 @@ function ResultTable(params) {
     const match = params.match;
     const onTyping = params.onTyping;
     const manualInput = params.manualInput;
-    let selectedSong = params.selectedSong;
+    let selectedRecording = params.selectedRecording;
 
-    const matchSong = (song) => {
+    const matchSoundRecording = (recording) => {
 
-        if (selectedSong.title !== emptyTitleSong) {
-            const registry = { 'song': selectedSong, 'matchedSong': song };
+        if (selectedRecording.title !== emptyTitleRecording) {
+            const registry = { 'recording': selectedRecording, 'matchedRecording': recording };
             match(registry);
-            selectedSong = {};
+            selectedRecording = {};
         }
     }
     return (
@@ -64,7 +64,7 @@ function ResultTable(params) {
 
                             <div className="alert-custom">
                                 <Alert variant="danger">
-                                    Sorry, we couldn't find any song that matches, but you can add a new one to the database.
+                                    Sorry, we couldn't find any recording that matches, but you can add a new one to the database.
                                     </Alert>
                             </div>
 
@@ -81,13 +81,13 @@ function ResultTable(params) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {filteredResults.map((song, index) => {
+                                        {filteredResults.map((recording, index) => {
                                             return (
-                                                <tr onClick={() => matchSong(song)} className={selectedSong.title !== emptyTitleSong ? "custom-row" : ""} key={index}>
-                                                    <td>{song.title}</td>
-                                                    <td>{song.artist}</td>
-                                                    <td>{song.isrc}</td>
-                                                    <td>{song.duration}</td>
+                                                <tr onClick={() => matchSoundRecording(recording)} className={selectedRecording.title !== emptyTitleRecording ? "custom-row" : ""} key={index}>
+                                                    <td>{recording.title}</td>
+                                                    <td>{recording.artist}</td>
+                                                    <td>{recording.isrc}</td>
+                                                    <td>{recording.duration}</td>
                                                 </tr>)
                                         })}
                                     </tbody>
