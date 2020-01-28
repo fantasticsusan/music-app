@@ -34,5 +34,9 @@ For styling the app: https://react-bootstrap.github.io/
 
 For icons: https://fontawesome.com
 
+### Google Fonts
+
+Fonts used in the application: https://fonts.google.com/
+
 
 
