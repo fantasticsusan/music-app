@@ -57,8 +57,6 @@ function AddRecording (params) {
                     <button type="button" className="close" onClick={handleClose}>&times;</button>
                         </h2>
                     </div>
-
-
                     <Form className="form-container" onSubmit={submitRecording}>
                         <div className="copy-song-container">
                             <button type="button" onClick={() => copySelectedRecordingData()} disabled={selectedRecording.title === EMPTY_RECORDING.title} className={selectedRecording.title === EMPTY_RECORDING.title ? "button-copy-data disabled" : "button-copy-data"} >Copy data from selected recording</button>
@@ -90,8 +88,6 @@ function AddRecording (params) {
                     </Form>
                 </div>
             </Modal>
-
-
         </Col>
     );
 

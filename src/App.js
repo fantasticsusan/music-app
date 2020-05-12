@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
-import Header from './Components/Header';
-import Home from './Components/Home';
+import Header from './Components/Header/index'
+import Layout from './Components/AppLayout';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Footer from './Components/Footer';
+import Footer from './Components/Footer/Footer';
 
 function App() {
   return (
     <div className="app">
       <Header/>
-      <Home/>
+      <Layout/>
       <Footer/>
     </div>
   );
