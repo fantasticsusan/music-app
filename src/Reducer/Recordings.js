@@ -1,6 +1,6 @@
-import ActionTypes from "../Actions/ActionTypes"
-import {EMPTY_INPUT, EMPTY_RECORDING} from "../Utils/const";
-import {sortByArtist} from "../Utils/functions";
+import ActionTypes from '../Actions/ActionTypes'
+import {EMPTY_INPUT, EMPTY_RECORDING} from '../Utils/const'
+import {sortByArtist} from '../Utils/functions'
 
 const INITIAL_STATE = {
     inputRecordings: {

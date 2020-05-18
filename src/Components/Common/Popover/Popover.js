@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import Popover from "react-popover"
+import Popover from 'react-popover'
 import PropTypes from 'prop-types'
-import {EMPTY_FIELD} from "../../../Utils/const";
+import {EMPTY_FIELD} from '../../../Utils/const'
 
 class RecordPopover extends Component {
     constructor(props) {

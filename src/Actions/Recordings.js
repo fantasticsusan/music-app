@@ -1,7 +1,7 @@
 import ActionTypes from './ActionTypes'
-import soundRecordingFile from '../Files/sound_recordings.csv';
+import soundRecordingFile from '../Files/sound_recordings.csv'
 import * as d3 from "d3"
-import soundRecordingInputReportFile from "../Files/sound_recordings_input_report.csv";
+import soundRecordingInputReportFile from "../Files/sound_recordings_input_report.csv"
 
 export function fetchInputRecordings() {
     return (dispatch) => {

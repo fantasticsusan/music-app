@@ -1,6 +1,6 @@
 import React from 'react'
-import {filterByRecording, filterByText} from "../../../../Utils/functions";
-import {EMPTY_INPUT, EMPTY_RECORDING} from "../../../../Utils/const";
+import {filterByRecording, filterByText} from '../../../../Utils/functions'
+import {EMPTY_INPUT, EMPTY_RECORDING} from '../../../../Utils/const'
 import {Badge, Spinner, Table} from '../../../../Components'
 import InputSearch from '../../../InputSearch'
 

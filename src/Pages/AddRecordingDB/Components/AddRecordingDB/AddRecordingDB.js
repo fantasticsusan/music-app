@@ -47,7 +47,7 @@ class AddRecordingDB extends React.Component {
     }
 
     handleChange(e) {
-        const value = e.target.value;
+        const value = e.target.value
         this.setState({
             ...this.state,
             recording: {
