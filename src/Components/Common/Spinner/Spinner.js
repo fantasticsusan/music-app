@@ -1,9 +1,12 @@
 import React from 'react'
-import Spinner from 'react-bootstrap/Spinner'
+import Loader from 'react-loader-spinner'
 
 const LoadingSpinner = () => (
-    <Spinner animation="border" role="status">
-        <span className="sr-only">Loading...</span>
-    </Spinner>
+    <Loader
+        type="Oval"
+        color="#b71c1c"
+        height={100}
+        width={100}
+    />
 )
 export default LoadingSpinner
