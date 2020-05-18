@@ -1,5 +1,6 @@
 import ActionTypes from "../Actions/ActionTypes"
 import {EMPTY_INPUT, EMPTY_RECORDING} from "../Utils/const";
+import {sortByArtist} from "../Utils/functions";
 
 const INITIAL_STATE = {
     inputRecordings: {
@@ -30,7 +31,7 @@ const reducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 inputRecordings: {
                     isLoading: false,
-                    data: action.payload
+                    data: sortByArtist(action.payload)
                 }
             }
 
@@ -47,7 +48,7 @@ const reducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 databaseRecordings: {
                     isLoading: false,
-                    data: action.payload
+                    data: sortByArtist(action.payload)
                 }
             }
         case ActionTypes.SELECT_RECORDING:
@@ -71,7 +72,7 @@ const reducer = (state = INITIAL_STATE, action) => {
                     ...state.inputRecordings,
                     data: state.inputRecordings.data.filter(recording => recording !== state.selectedRecording),
                 },
-                matchRecordings: [
+                matchRecordings: sortByArtist([
                     ...state.matchRecordings,
                     {
                         'title': action.inputRecording.title,
@@ -80,7 +81,7 @@ const reducer = (state = INITIAL_STATE, action) => {
                         'duration': action.inputRecording.duration,
                         'matchedRecording': action.databaseRecording
                     }
-                ]
+                ])
             }
 
         case ActionTypes.UNMATCH_RECORDING:
@@ -91,7 +92,7 @@ const reducer = (state = INITIAL_STATE, action) => {
                 matchRecordings: state.matchRecordings.filter(recording => recording !== action.recording),
                 inputRecordings: {
                     ...state.inputRecordings,
-                    data: [
+                    data: sortByArtist([
                         ...state.inputRecordings.data,
                         {
                             'title': action.recording.title,
@@ -99,7 +100,7 @@ const reducer = (state = INITIAL_STATE, action) => {
                             'isrc': action.recording.isrc,
                             'duration': action.recording.duration,
                         }
-                    ]
+                    ])
                 }
             }
 
@@ -108,10 +109,10 @@ const reducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 databaseRecordings: {
                     ...state.databaseRecordings,
-                    data: [
+                    data: sortByArtist([
                         ...state.databaseRecordings.data,
                         action.recording
-                    ]
+                    ])
                 }
 
             }
