@@ -22,32 +22,7 @@ export function fetchDatabaseRecordings() {
     }
 }
 
-export function setSelectedRecording(recording) {
-    return (dispatch) => {
-        dispatch(selectRecording(recording));
-    }
-}
-
-export function matchRecording(inputRecording, databaseRecording) {
-    return (dispatch) => {
-        dispatch(matchSound(inputRecording, databaseRecording))
-    }
-}
-
-export function unmatchRecording(recording) {
-    return (dispatch) => {
-        dispatch(unmatchSound(recording))
-    }
-}
-
 export function addRecordingToDB(recording) {
-    return (dispatch) => {
-        dispatch(addRecording(recording))
-    }
-}
-
-
-function addRecording(recording) {
     return {
         type: ActionTypes.ADD_DB_RECORDINGS,
         recording: recording
@@ -60,7 +35,7 @@ function requestInputRecordings() {
     }
 }
 
-function matchSound(inputRecording, databaseRecording) {
+export function matchRecording(inputRecording, databaseRecording) {
     return {
         type: ActionTypes.MATCH_RECORDING,
         inputRecording: inputRecording,
@@ -68,7 +43,7 @@ function matchSound(inputRecording, databaseRecording) {
     }
 }
 
-function unmatchSound(recording) {
+export function unmatchRecording(recording) {
     return {
         type: ActionTypes.UNMATCH_RECORDING,
         recording: recording,
@@ -102,7 +77,7 @@ export function setSearchText(text) {
     }
 }
 
-function selectRecording(recording) {
+export function setSelectedRecording(recording) {
     return {
         type: ActionTypes.SELECT_RECORDING,
         recording
