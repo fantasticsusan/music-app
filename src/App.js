@@ -1,7 +1,7 @@
 import React from 'react'
 import './Style/App.scss'
 import {Header, Footer} from './Components'
-import {Layout} from './Pages'
+import Layout from './Pages/Layout'
 
 function App() {
   return (

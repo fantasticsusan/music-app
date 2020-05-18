@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Popover} from '../../../Components'
+import Popover from '../Popover'
 
 class RecordingTable extends React.Component {
 
