@@ -53,7 +53,7 @@ class InputTable extends React.Component {
                         {inputRecordings.length === 0 ?
                             <div className="message is-success">
                                 <div className="message-body">
-                                    Hooray! You matched all your songs!
+                                    Hooray! You matched all your recordings!
                                 </div>
                             </div>
                             :
