@@ -1,9 +1,7 @@
-import React from 'react';
-import './App.css';
-import Header from './Components/Header/index'
-import Layout from './Components/AppLayout';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Footer from './Components/Footer/Footer';
+import React from 'react'
+import './Style/App.scss'
+import {Header, Footer} from './Components'
+import {Layout} from './Pages'
 
 function App() {
   return (

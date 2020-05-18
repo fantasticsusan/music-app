@@ -1,0 +1,35 @@
+// colors
+$white-color: #FFFFFF;
+
+// primary, secondary
+$primary-color: #b71c1c;
+$primary-color-lighter: #e53935;
+$required-field-color: #7f0000;
+
+// Components
+$view-max-width: 1200px;
+$device-max-width: 320px;
+$pc-min-width: 650px;
+
+$text-font-size: 15px;
+$text-small-font-size: 10px;
+$text-big-font-size: 20px;
+$title-font-size: 65px;
+$subtitle-font-size: 12px;
+$size-1: 4em;
+$mobile: 768px;
+$subtitle-color: none;
+// Misc
+$text-color: #37474f;
+$light-text-color: #949da4;
+$color-body-bg: #F5F5F5;
+$color-shadow-light: lightgrey;
+$title-font: 'Open Sans Condensed', sans-serif;
+
+$tabs-toggle-link-active-background-color: $primary-color;
+$tabs-toggle-link-active-border-color: $primary-color;
+$tabs-link-active-color: $primary-color;
+$tabs-link-active-border-bottom-color: $primary-color;
+$input-arrow:$primary-color;
+$input-focus-border-color: $primary-color;
+$border-light-color: #ddd;

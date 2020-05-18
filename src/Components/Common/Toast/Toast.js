@@ -2,7 +2,7 @@ import React from 'react'
 import {
     Toast
 } from 'react-bootstrap'
-import {EMPTY_RECORDING} from '../../../utils/const'
+import {EMPTY_RECORDING} from '../../../Utils/const'
 import PropTypes from 'prop-types'
 
 function ToastSuccess(params) {

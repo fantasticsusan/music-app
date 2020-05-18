@@ -1,0 +1,241 @@
+@charset "utf-8";
+@import "../Style/base";
+@import "../../node_modules/bulma/bulma.sass";
+@import '~@creativebulma/bulma-tooltip';
+
+.title {
+    text-transform: uppercase;
+    font-family: 'Dosis', sans-serif;
+    font-size: 65px;
+    margin-bottom: 20px;
+    padding: 70px 70px 5px 5px;
+    color:$white-color;
+}
+
+.app {
+    font-family: "Montserrat", "Arial", serif;
+    color: $text-color;
+    font-size: 15px;
+    font-weight: 300;
+    position: relative;
+    /**   background-color: white; **/
+}
+
+.subtitle {
+    text-transform: uppercase;
+    font-family: 'Dosis', sans-serif;
+    font-size: 30px;
+    margin: 10px;
+    padding: 10px;
+    border-bottom: 1px solid $text-color;
+}
+
+.header {
+    text-align: right;
+    background-color: $primary-color;
+    height: 100%;
+    color: white;
+    padding: 15px;
+}
+
+.footer {
+    text-align: center;
+    background-color: $primary-color;
+    color: white;
+    padding: 30px;
+    margin-top:40px;
+}
+
+.body-container {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    margin: 30px;
+    padding: 30px;
+    background: white;
+    height: 100%;
+    position: relative;
+    min-height: 100px;
+}
+
+.button-add-recording {
+    background-color: $primary-color;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: white;
+    display: inline-block;
+    margin: 10px;
+    border: none;
+}
+
+.button-copy-data {
+    background-color: white;
+    color: $primary-color;
+    border-radius: 10px;
+    padding: 5px 10px;
+    display: inline-block;
+    border: 1px solid $primary-color;
+    font-size: 12px;
+}
+
+.disabled {
+    cursor: not-allowed;
+    color: grey;
+    border: 1px solid grey;
+}
+
+.button-copy-data:hover {
+    font-weight: bolder;
+}
+
+.disabled:hover {
+    font-weight: 400;
+}
+
+.button-add-recording:hover {
+    background-color: $primary-color-lighter;
+}
+
+.form-container {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.center {
+    text-align: center;
+}
+
+.custom-alert {
+    padding: 20px;
+    margin: 20px;
+}
+
+.custom-row:hover {
+    cursor: pointer;
+    background-color: $primary-color-lighter !important;
+    color: white !important;
+}
+
+.selected-row {
+    background-color: $primary-color !important;
+    color: white;
+}
+
+.selected-row:hover {
+    cursor: pointer;
+}
+
+hr {
+    color: white;
+    border: 2px solid white !important;
+}
+
+.table-header-body {
+    padding: 10px;
+}
+
+.table-scrollable thead th {
+    position: sticky;
+    top: 0;
+}
+
+.table-scrollable {
+    overflow-y: auto;
+    height: 500px;
+}
+
+.thead-custom {
+    background-color: white;
+    padding: 3px;
+    margin-top: 30px;
+    border-top: none !important;
+    width: 30%;
+}
+
+.column-width-small {
+    width: 10%;
+}
+
+.match-table {
+    width: 100%;
+}
+
+.table-header {
+    text-align: left;
+    align-items: flex-start;
+}
+
+.table-header-input {
+    margin-bottom: 65px;
+}
+
+.items-result {
+    color: grey;
+    text-align: right;
+}
+
+.badge {
+    font-size: larger !important;
+}
+
+.search-input {
+    padding: 0 20px 0 20px;
+}
+
+.modal-title-header {
+    background-color: $primary-color;
+    color: white;
+    padding: 30px;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    border-radius: 19px 19px 0 0;
+}
+
+.modal-title {
+    text-transform: uppercase;
+    font-family: 'Dosis', sans-serif;
+    font-size: 30px;
+    margin: 10px;
+}
+
+.modal-content {
+    border-radius: 20px !important;
+    background-color: white;
+}
+
+.toast-success {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 20px;
+    max-width: 100vw !important;
+}
+
+.toast-success-body {
+    color: #155724;
+    background-color: #d4edda;
+    padding: 10px;
+}
+
+.bolder {
+    font-weight: 400;
+}
+
+.required-field {
+    color: $required-field-color;
+}
+
+.table-match-container {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.copy-song-container {
+    align-content: end;
+    margin: 10px 0 20px 0;
+}
+
+.popover-container{
+    background-color: whitesmoke;
+    padding:10px;
+}
