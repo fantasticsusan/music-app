@@ -18,15 +18,15 @@ class InputTable extends React.Component {
         this.props.getInputRecordings()
     }
 
-    handleClick (newSelectedRecording) {
+    handleClick(newSelectedRecording) {
         let recording = newSelectedRecording === this.props.selectedRecording ? EMPTY_RECORDING : newSelectedRecording
         this.props.selectRecording(recording)
     }
 
-    render(){
+    render() {
 
         const {inputRecordings, isLoading, selectedRecording} = this.props
-        if(isLoading){
+        if (isLoading) {
             return (
                 <Spinner/>
             )
@@ -50,14 +50,23 @@ class InputTable extends React.Component {
                 </div>
                 <div className="columns">
                     <div className="column is-full">
-                        <Table
-                            elements={inputRecordings}
-                            selectedRecording={selectedRecording}
-                            handleClick={this.handleClick}
-                        />
+                        {inputRecordings.length === 0 ?
+                            <div className="message is-success">
+                                <div className="message-body">
+                                    Hooray! You matched all your songs!
+                                </div>
+                            </div>
+                            :
+                            <Table
+                                elements={inputRecordings}
+                                selectedRecording={selectedRecording}
+                                handleClick={this.handleClick}
+                            />
+                        }
                     </div>
                 </div>
             </React.Fragment>)
     }
 }
+
 export default InputTable
