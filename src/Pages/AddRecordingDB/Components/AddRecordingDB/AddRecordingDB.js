@@ -1,5 +1,6 @@
 import React from 'react'
 import {EMPTY_RECORDING} from '../../../../Utils/const'
+import PropTypes from 'prop-types'
 
 class AddRecordingDB extends React.Component {
 
@@ -47,12 +48,12 @@ class AddRecordingDB extends React.Component {
     }
 
     handleChange(e) {
-        const value = e.target.value
+        const target = e.target
         this.setState({
             ...this.state,
             recording: {
                 ...this.state.recording,
-                [e.target.name]: value
+                [target.name]: target.value
             }
         })
     }
@@ -162,5 +163,8 @@ class AddRecordingDB extends React.Component {
         )
     }
 }
-
+AddRecordingDB.propTypes = {
+    selectedRecording: PropTypes.object,
+    addRecordingToDB: PropTypes.func.isRequired
+}
 export default AddRecordingDB

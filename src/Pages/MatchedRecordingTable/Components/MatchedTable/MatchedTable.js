@@ -1,6 +1,7 @@
 import React from 'react'
 import {EMPTY_RECORDING} from '../../../../Utils/const'
 import {Badge, Table} from '../../../../Components'
+import PropTypes from 'prop-types'
 
 class MatchedTable extends React.Component {
 
@@ -37,5 +38,8 @@ class MatchedTable extends React.Component {
         )
     }
 }
-
+MatchedTable.propTypes = {
+    matchRecordings: PropTypes.array.isRequired,
+    unmatchRecording: PropTypes.func.isRequired
+}
 export default MatchedTable

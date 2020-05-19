@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class InputSearch extends React.Component {
 
@@ -34,5 +35,8 @@ class InputSearch extends React.Component {
         )
     }
 }
-
+InputSearch.propTypes = {
+    searchText: PropTypes.string.isRequired,
+    setSearchText: PropTypes.func.isRequired,
+}
 export default InputSearch

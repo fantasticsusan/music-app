@@ -1,6 +1,7 @@
 import React from 'react'
 import {EMPTY_RECORDING} from '../../../../Utils/const'
 import {Spinner, Table, Badge} from '../../../../Components'
+import PropTypes from 'prop-types'
 
 class InputTable extends React.Component {
 
@@ -68,5 +69,11 @@ class InputTable extends React.Component {
             </React.Fragment>)
     }
 }
-
+InputTable.propTypes = {
+    selectedRecording: PropTypes.object.isRequired,
+    inputRecordings: PropTypes.array.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    getInputRecordings: PropTypes.func.isRequired,
+    selectRecording: PropTypes.func.isRequired
+}
 export default InputTable

@@ -3,6 +3,7 @@ import {filterByRecording, filterByText} from '../../../../Utils/functions'
 import {EMPTY_INPUT, EMPTY_RECORDING} from '../../../../Utils/const'
 import {Badge, Spinner, Table} from '../../../../Components'
 import InputSearch from '../../../InputSearch'
+import PropTypes from 'prop-types'
 
 class ResultsTable extends React.Component {
 
@@ -98,5 +99,13 @@ class ResultsTable extends React.Component {
         )
     }
 }
+ResultsTable.propTypes = {
+    databaseRecordings: PropTypes.array.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    searchText: PropTypes.string.isRequired,
+    selectedRecording: PropTypes.object.isRequired,
+    fetchDatabaseRecordings: PropTypes.func.isRequired,
+    matchRecording: PropTypes.func.isRequired,
 
+}
 export default ResultsTable
