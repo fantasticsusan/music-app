@@ -46,7 +46,7 @@ class ResultsTable extends React.Component {
     render() {
 
         const {databaseRecordings, isLoading} = this.props
-        const {filteredRecordings, selectedRecording} = this.state
+        const {filteredRecordings} = this.state
 
         if (isLoading) {
             return (
@@ -89,7 +89,6 @@ class ResultsTable extends React.Component {
                                 :
                                 <Table
                                     elements={filteredRecordings}
-                                    selectedRecording={selectedRecording}
                                     handleClick={this.handleClick}
                                 />
                         }
