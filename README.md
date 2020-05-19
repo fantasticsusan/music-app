@@ -18,17 +18,13 @@ Builds the app for production to the `build` folder.<br />
 
 ## Dependencies
 
-### Create React App
-
-Used to create project's template: https://github.com/facebook/create-react-app
-
 ### D3 Library
 
 Used to parse csv to json: https://d3-wiki.readthedocs.io/zh_CN/master/CSV/
 
-### Bootstrap React
+### Bulma
 
-For styling the app: https://react-bootstrap.github.io/
+For styling the app: https://bulma.io/
 
 ### Font-Awesome
 
@@ -37,6 +33,3 @@ For icons: https://fontawesome.com
 ### Google Fonts
 
 Fonts used in the application: https://fonts.google.com/
-
-
-
