@@ -1,7 +1,7 @@
 import actionTypes from '../Actions/ActionTypes'
 import reducer from './Recordings'
-import {EMPTY_INPUT, EMPTY_RECORDING} from "../Utils/const";
 import {sortByArtist} from "../Utils/functions";
+import {RECORDING, SEARCH_TEXT, EMPTY_INPUT, EMPTY_RECORDING, INPUT_RECORD, DB_RECORD, INPUT_RECORD_LIST, DB_RECORD_LIST} from "../Utils/constTest";
 
 const INITIAL_STATE = {
     inputRecordings: {
@@ -16,14 +16,6 @@ const INITIAL_STATE = {
     searchText: EMPTY_INPUT,
     selectedRecording: EMPTY_RECORDING
 }
-
-const RECORDING = {title: 'Test recording', artist: 'Test artist', isrc: "654443", duration: "433"}
-const SEARCH_TEXT = "Search text"
-const INPUT_RECORDING = {title: 'Input recording', artist: 'Test artist', isrc: "654443", duration: "433"}
-const DB_RECORDING = {title: 'DB recording', artist: 'Test artist', isrc: "654443", duration: "433"}
-const INPUT_RECORDING_LIST = [{title: 'Input recording', artist: 'Test artist', isrc: "654443", duration: "433"}]
-const DB_RECORDING_LIST = [{title: 'DB recording', artist: 'Test artist', isrc: "654443", duration: "433"}]
-
 
 describe('Recordings reducer', () => {
     it('should return the initial state', () => {
@@ -50,13 +42,13 @@ describe('Recordings reducer', () => {
         expect(
             reducer(INITIAL_STATE, {
                 type: actionTypes.LOAD_INPUT_RECORDINGS,
-                payload: INPUT_RECORDING_LIST
+                payload: INPUT_RECORD_LIST
             })
         ).toEqual({
                 ...INITIAL_STATE,
                 inputRecordings: {
                     isLoading: false,
-                    data: sortByArtist(INPUT_RECORDING_LIST)
+                    data: sortByArtist(INPUT_RECORD_LIST)
                 }
             }
         )
@@ -81,13 +73,13 @@ describe('Recordings reducer', () => {
         expect(
             reducer(INITIAL_STATE, {
                 type: actionTypes.LOAD_DB_RECORDINGS,
-                payload: DB_RECORDING_LIST
+                payload: DB_RECORD_LIST
             })
         ).toEqual({
                 ...INITIAL_STATE,
                 databaseRecordings: {
                     isLoading: false,
-                    data: sortByArtist(DB_RECORDING_LIST)
+                    data: sortByArtist(DB_RECORD_LIST)
                 }
             }
         )
@@ -123,8 +115,8 @@ describe('Recordings reducer', () => {
         expect(
             reducer(INITIAL_STATE, {
                 type: actionTypes.MATCH_RECORDING,
-                inputRecording: INPUT_RECORDING,
-                databaseRecording: DB_RECORDING,
+                inputRecording: INPUT_RECORD,
+                databaseRecording: DB_RECORD,
             })
         ).toEqual({
                 ...INITIAL_STATE,
@@ -137,11 +129,11 @@ describe('Recordings reducer', () => {
                 matchRecordings: sortByArtist([
                     ...INITIAL_STATE.matchRecordings,
                     {
-                        'title': INPUT_RECORDING.title,
-                        'artist': INPUT_RECORDING.artist,
-                        'isrc': INPUT_RECORDING.isrc,
-                        'duration': INPUT_RECORDING.duration,
-                        'matchedRecording': DB_RECORDING
+                        'title': INPUT_RECORD.title,
+                        'artist': INPUT_RECORD.artist,
+                        'isrc': INPUT_RECORD.isrc,
+                        'duration': INPUT_RECORD.duration,
+                        'matchedRecording': DB_RECORD
                     }
                 ])
             }

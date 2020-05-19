@@ -2,23 +2,18 @@ import * as actions from './Recordings'
 import ActionTypes from './ActionTypes'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-
+import {RECORDING,SEARCH_TEXT, INPUT_RECORD, DB_RECORD } from "../Utils/constTest";
 
 const middleware = [thunk]
 const mockStore = configureMockStore(middleware)
 const store = mockStore()
-
-const RECORDING = {title: 'Test', artist: 'Test artist', isrc: "654443", duration: "433"}
-const SEARCH_TEXT = "Search test"
-const INPUT_RECORDING = {title: 'Input recording', artist: 'Test artist', isrc: "654443", duration: "433"}
-const DB_RECORDING = {title: 'DB recording', artist: 'Test artist', isrc: "654443", duration: "433"}
 
 describe('recording actions', () => {
     beforeEach(() => { // Runs before each test in the suite
         store.clearActions()
     })
 
-    it('addRecordingToDB should create ADD_DB_RECORDINGS action', () => {
+    it('addRecordingToDB should create ADD_DB_RECORDS action', () => {
         expect(actions.addRecordingToDB(RECORDING)).toEqual({
             type: ActionTypes.ADD_DB_RECORDINGS,
             recording: RECORDING
@@ -26,10 +21,10 @@ describe('recording actions', () => {
     })
 
     it('matchRecording should create MATCH_RECORDING action', () => {
-        expect(actions.matchRecording(INPUT_RECORDING, DB_RECORDING)).toEqual({
+        expect(actions.matchRecording(INPUT_RECORD, DB_RECORD)).toEqual({
             type: ActionTypes.MATCH_RECORDING,
-            inputRecording: INPUT_RECORDING,
-            databaseRecording: DB_RECORDING,
+            inputRecording: INPUT_RECORD,
+            databaseRecording: DB_RECORD,
         })
     })
 
